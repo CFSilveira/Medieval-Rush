@@ -13,14 +13,23 @@ class Soldiers {
     }
 
     draw() {
-        if (this.type === 1) {
-            this.img.src = './images/bow2.png';
+        if (this.type === 1 && this.faction === 'blue') {
+            this.img.src = './images/bspear.png';
         }
-        else if (this.type === 2) {
-            this.img.src = './images/knight2.png';
+        else if (this.type === 1 && this.faction === 'red') {
+            this.img.src = './images/rspear.png';
         }
-        else if (this.type === 3) {
-            this.img.src = './images/spear2.png';
+        else if (this.type === 2 && this.faction === 'blue') {
+            this.img.src = './images/bhorseright.png';
+        }
+        else if (this.type === 2 && this.faction === 'red') {
+            this.img.src = './images/rhorseleft.png';
+        }
+        else if (this.type === 3 && this.faction === 'blue') {
+            this.img.src = './images/bbowright.png';
+        }
+        else if (this.type === 3 && this.faction === 'red') {
+            this.img.src = './images/rbowleft.png';
         }
         this.game.ctx.drawImage(this.img, this.x, this.y, 90, 90);
     }

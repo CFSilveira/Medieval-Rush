@@ -1,15 +1,22 @@
 const blueArmy = [];
 
-function draw() {
-    if (this.type === 1) {
-        this.img.src = './images/bow2.png';
+class Controls {
+    constructor(game) {
+      this.game = game;
+      this.soldier = this.game.soldier;
     }
-    else if (this.type === 2) {
-        this.img.src = './images/knight2.png';
+  
+    keyboardEvents() {
+      window.addEventListener('keydown', (e) => {
+        switch (e.code) {
+          case 'ArrowRight':
+              this.soldier.x += 100;
+            
+            break;
+          case 'ArrowLeft':
+              this.car.x -= 100;
+              break;
+        }
+      });
     }
-    else if (this.type === 3) {
-        this.img.src = './images/spear2.png';
-    }
-    this.game.ctx.drawImage(this.img, this.x, this.y, 90, 90);
-}
-
+  }
