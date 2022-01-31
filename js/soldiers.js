@@ -11,6 +11,7 @@ class Soldiers {
         this.facing = facing;
         this.isSelected = isSelected;
         this.img = new Image();
+        this.square = new Image();
         this.canvas;
     }
 
@@ -47,6 +48,19 @@ class Soldiers {
             } else {this.img.src = './images/rbowleft.png';}
         }
         this.game.ctx.drawImage(this.img, this.x, this.y, 90, 90);
+
+    }
+
+    drawSquare() {
+        //draws a square around the selected unit
+        if (this.faction === 'blue') {
+            this.square.src = './images/bsquare.png';
+        }
+        else if (this.faction === 'red') {
+            this.square.src = './images/rsquare.png';
+        }        
+
+        this.game.ctx.drawImage(this.square, this.x, this.y, 100, 100);
     }
     
 }

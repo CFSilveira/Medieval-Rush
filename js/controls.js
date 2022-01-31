@@ -30,6 +30,12 @@ class Controls {
                         console.log(`Unit on square ${this.blueArmy[i].gps} moves right`);
                         this.blueArmy[i].facing = 'right';
                         this.blueArmy[i].x += 100;
+                        this.blueArmy[i].gps = (this.blueArmy[i].x / 100).toString() + (this.blueArmy[i].y / 100).toString();
+                        this.redArmy.forEach((redsoldier) => {
+                            if (redsoldier.gps === this.blueArmy[i].gps) {
+                                console.log('Ouch!');
+                            }
+                        });  
                     }
                 }
                 break;
@@ -41,8 +47,14 @@ class Controls {
                         console.log(`Unit on square ${this.blueArmy[i].gps} moves left`);
                         this.blueArmy[i].facing = 'left';
                         this.blueArmy[i].x -= 100;
-                    }
+                        this.blueArmy[i].gps = (this.blueArmy[i].x / 100).toString() + (this.blueArmy[i].y / 100).toString();
+                        this.redArmy.forEach((redsoldier) => {
+                            if (redsoldier.gps === this.blueArmy[i].gps) {
+                                console.log('Ouch!');
+                            }
+                    });  
                 }
+            }
                 break;
 
             case 'KeyW':
@@ -51,8 +63,14 @@ class Controls {
                     if (this.blueArmy[i].isSelected) {
                         console.log(`Unit on square ${this.blueArmy[i].gps} moves up`);
                         this.blueArmy[i].y -= 100;
-                    }
+                        this.blueArmy[i].gps = (this.blueArmy[i].x / 100).toString() + (this.blueArmy[i].y / 100).toString()
+                        this.redArmy.forEach((redsoldier) => {
+                            if (redsoldier.gps === this.blueArmy[i].gps) {
+                                console.log('Ouch!');
+                            }
+                    });  
                 }
+            }
                 break;
 
             case 'KeyS':
@@ -61,8 +79,14 @@ class Controls {
                     if (this.blueArmy[i].isSelected) {
                         console.log(`Unit on square ${this.blueArmy[i].gps} moves down`);
                         this.blueArmy[i].y += 100;
-                    }
+                        this.blueArmy[i].gps = (this.blueArmy[i].x / 100).toString() + (this.blueArmy[i].y / 100).toString()
+                        this.redArmy.forEach((redsoldier) => {
+                            if (redsoldier.gps === this.blueArmy[i].gps) {
+                                console.log('Ouch!');
+                            }
+                    });  
                 }
+            }
                 break;
 
             //red team movement
@@ -86,8 +110,14 @@ class Controls {
                         console.log(`Unit on square ${this.redArmy[i].gps} moves right`);
                         this.redArmy[i].facing = 'right';
                         this.redArmy[i].x += 100;
-                        }
+                        this.redArmy[i].gps = (this.redArmy[i].x / 100).toString() + (this.redArmy[i].y / 100).toString()
+                        this.blueArmy.forEach((bluesoldier) => {
+                            if (bluesoldier.gps === this.redArmy[i].gps) {
+                                console.log('Ouch!');
+                            }
+                        });
                     }
+                }
                 break;
 
             case 'ArrowLeft':
@@ -97,6 +127,12 @@ class Controls {
                         console.log(`Unit on square ${this.redArmy[i].gps} moves left`);
                         this.redArmy[i].facing = 'left';
                         this.redArmy[i].x -= 100;
+                        this.redArmy[i].gps = (this.redArmy[i].x / 100).toString() + (this.redArmy[i].y / 100).toString()
+                        this.blueArmy.forEach((bluesoldier) => {
+                            if (bluesoldier.gps === this.redArmy[i].gps) {
+                                console.log('Ouch!');
+                            }
+                        });
                         }
                     }
                 break;
@@ -107,6 +143,12 @@ class Controls {
                     if (this.redArmy[i].isSelected) {
                         console.log(`Unit on square ${this.redArmy[i].gps} moves up`);
                         this.redArmy[i].y -= 100;
+                        this.redArmy[i].gps = (this.redArmy[i].x / 100).toString() + (this.redArmy[i].y / 100).toString()
+                        this.blueArmy.forEach((bluesoldier) => {
+                            if (bluesoldier.gps === this.redArmy[i].gps) {
+                                console.log('Ouch!');
+                            }
+                        });
                         }
                     }
                 break;
@@ -117,13 +159,20 @@ class Controls {
                     if (this.redArmy[i].isSelected) {
                         console.log(`Unit on square ${this.redArmy[i].gps} moves down`);
                         this.redArmy[i].y += 100;
+                        this.redArmy[i].gps = (this.redArmy[i].x / 100).toString() + (this.redArmy[i].y / 100).toString()
+                        this.blueArmy.forEach((bluesoldier) => {
+                            if (bluesoldier.gps === this.redArmy[i].gps) {
+                                console.log('Ouch!');
+                            }
+                        });
                         }
                     }
                 break;
           }
           });
         }
-    }
+    
+}
     
 
 

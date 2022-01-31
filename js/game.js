@@ -12,6 +12,7 @@ class Game {
         this.fullArmy = [];
         this.blueArmy = [];
         this.redArmy = [];
+        this.stamina = 0;
 
     }
 
@@ -87,17 +88,35 @@ class Game {
 
     update() {
         this.drawBackground();
+        this.frames++;
 
         //draws all the blue units
         this.blueArmy.forEach((bluesoldier) => {
             bluesoldier.draw();
         });
 
+        //draws a blue square around the selected unit
+        this.blueArmy.forEach((bluesoldier) => {
+            if (bluesoldier.isSelected) {
+                bluesoldier.drawSquare();
+            }
+        });
+
         //draws all the red units
         this.redArmy.forEach((redsoldier) => {
             redsoldier.draw();
         });
+
+        //draws a red square around the selected unit
+        this.redArmy.forEach((redsoldier) => {
+            if (redsoldier.isSelected) {
+                redsoldier.drawSquare();
+            }
+        });
         
+
+
+        this.staminaCounter();
 
     }
 
@@ -105,5 +124,12 @@ class Game {
     drawBackground() {
         this.background.src = './images/background.png'        
         this.ctx.drawImage(this.background, this.x, this.y, this.canvasWidth, this.canvasHeight);
+    }
+
+    staminaCounter() {
+        if (this.frames % 300 === 0) {
+          this.stamina ++;
+          console.log(this.stamina);
+        }
     }
 }
