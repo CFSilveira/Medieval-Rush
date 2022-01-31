@@ -1,7 +1,6 @@
 class Soldiers {
-    constructor(game, faction, type, x, y, width, height, gps, hp, facing) {
+    constructor(game, type, x, y, width, height, gps, hp, facing, isSelected) {
         this.game = game;
-        this.faction = faction;
         this.type = type;
         this.x = x;
         this.y = y;
@@ -10,6 +9,7 @@ class Soldiers {
         this.gps = gps;
         this.hp = hp;
         this.facing = facing;
+        this.isSelected = isSelected;
         this.img = new Image();
         this.canvas;
     }
@@ -41,10 +41,29 @@ class Soldiers {
 }
 
 class BlueSoldier extends Soldiers {
-    constructor(game, faction, type, x, y, width, height, gps, hp, facing) {
+    constructor(game, faction, type, x, y, width, height, gps, hp, facing, isSelected) {
         super(game, type, x, y, width, height, gps, hp, facing);
-        this.faction = faction;
+        this.faction = 'blue';
     }
+
+    keyboardEvents() {
+        window.addEventListener('keydown', (e) => {
+          switch (e.code) {
+            case 'KeyD':
+                this.BlueSoldier.x += 100;
+                break;
+            case 'KeyA':
+                this.BlueSoldier.x -= 100;
+                break;
+            case 'KeyW':
+                this.BlueSoldier.y += 100;
+                break;
+            case 'KeyS':
+                this.BlueSoldier.y -= 100;
+                break;
+            }
+        });
+      }
 }
 
 class RedSoldier extends Soldiers {
@@ -52,4 +71,23 @@ class RedSoldier extends Soldiers {
         super(game, type, x, y, width, height, gps, hp, facing);
         this.faction = faction;
     }
+
+    keyboardEvents() {
+        window.addEventListener('keydown', (e) => {
+          switch (e.code) {
+            case 'ArrowRight':
+                this.RedSoldier.x += 100;
+                break;
+            case 'ArrowLeft':
+                this.RedSoldier.x -= 100;
+                break;
+            case 'ArrowUp':
+                this.RedSoldier.y += 100;
+                break;
+            case 'ArrowDown':
+                this.RedSoldier.y -= 100;
+                break;
+            }
+        });
+      }
 }
