@@ -1,5 +1,5 @@
 class Soldiers {
-    constructor(game, faction, type, x, y, width, height, gps) {
+    constructor(game, faction, type, x, y, width, height, gps, hp, facing) {
         this.game = game;
         this.faction = faction;
         this.type = type;
@@ -7,7 +7,9 @@ class Soldiers {
         this.y = y;
         this.width = width;
         this.height = height;
-        this.gps = gps
+        this.gps = gps;
+        this.hp = hp;
+        this.facing = facing;
         this.img = new Image();
         this.canvas;
     }
@@ -20,8 +22,10 @@ class Soldiers {
             this.img.src = './images/rspear.png';
         }
         else if (this.type === 2 && this.faction === 'blue') {
-            this.img.src = './images/bhorseright.png';
-        }
+            if (this.direction === 'right') {
+                this.img.src = './images/bhorseright.png';
+            } else {this.img.src = './images/bhorseleft.png';}
+                    }
         else if (this.type === 2 && this.faction === 'red') {
             this.img.src = './images/rhorseleft.png';
         }
@@ -34,4 +38,18 @@ class Soldiers {
         this.game.ctx.drawImage(this.img, this.x, this.y, 90, 90);
     }
     
+}
+
+class BlueSoldier extends Soldiers {
+    constructor(game, faction, type, x, y, width, height, gps, hp, facing) {
+        super(game, type, x, y, width, height, gps, hp, facing);
+        this.faction = faction;
+    }
+}
+
+class RedSoldier extends Soldiers {
+    constructor(game, faction, type, x, y, width, height, gps, hp, facing) {
+        super(game, type, x, y, width, height, gps, hp, facing);
+        this.faction = faction;
+    }
 }

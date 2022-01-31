@@ -1,10 +1,12 @@
-const blueArmy = [];
+const blueArmy2 = [];
 
 class Controls {
     constructor(game) {
       this.game = game;
       this.soldier = this.game.soldier;
     }
+
+    //keyboard events added here, but I assume they should be moved to soldier.js
   
     keyboardEvents() {
       window.addEventListener('keydown', (e) => {
