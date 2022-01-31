@@ -26,7 +26,12 @@ class Game {
             let gps = xAxis.toString() + yAxis.toString()
             xAxis = xAxis * 100;
             yAxis = yAxis * 100;
-            this.soldiers = new BlueSoldier(this, 'blue', typeOfSoldier, xAxis, yAxis, 100, 100, gps, 10, 'right');
+            if (i < 4) {
+                this.soldiers = new BlueSoldier(this, 'blue', typeOfSoldier, xAxis, yAxis, 100, 100, gps, 10, 'right', false);
+            }
+            else {
+                this.soldiers = new BlueSoldier(this, 'blue', typeOfSoldier, xAxis, yAxis, 100, 100, gps, 10, 'right', true);
+            }
             let newSoldier = this.soldiers;
             //checking if there is another soldier on that square
             this.blueArmy.push(newSoldier);
@@ -51,7 +56,12 @@ class Game {
             let gps = xAxis.toString() + yAxis.toString()
             xAxis = xAxis * 100;
             yAxis = yAxis * 100;
-            this.soldiers = new RedSoldier(this, 'red', typeOfSoldier, xAxis, yAxis, 100, 100, gps, 10, 'left');
+            if (i < 4) {
+                this.soldiers = new RedSoldier(this, 'red', typeOfSoldier, xAxis, yAxis, 100, 100, gps, 10, 'left', false);
+            }
+            else {
+                this.soldiers = new RedSoldier(this, 'red', typeOfSoldier, xAxis, yAxis, 100, 100, gps, 10, 'left', true);
+            }
             let newSoldier = this.soldiers;
             //checking if there is another soldier on that square
             this.redArmy.push(newSoldier);
@@ -78,24 +88,17 @@ class Game {
     update() {
         this.drawBackground();
 
-        this.blueArmy.forEach((BlueSoldier) => {
-            BlueSoldier.draw();
+        //draws all the blue units
+        this.blueArmy.forEach((bluesoldier) => {
+            bluesoldier.draw();
         });
 
-                this.redArmy.forEach((RedSoldier) => {
-                    RedSoldier.draw();
+        //draws all the red units
+        this.redArmy.forEach((redsoldier) => {
+            redsoldier.draw();
         });
         
-/*         for (let i = 0 ; i < blueArmy.length; i++) {
-            let blueToDraw = blueArmy[i];
-            console.log(blueToDraw[i])
-            let redToDraw = redArmy[i];
-            console.log(redToDraw[i])
-        } */
-        
 
-        //this.soldiers.draw();
-        //unidadeAzul.draw();
     }
 
 
