@@ -126,6 +126,9 @@ class Game {
             base.draw()
         });
         
+        this.staminaCounter();
+        this.productionCounter();
+        this.unitProduction();
         this.frames++;
 
         //draws all the blue units and stamina status
@@ -153,10 +156,7 @@ class Game {
             if (redsoldier.isSelected) {
                 redsoldier.drawSquare();
             }
-        });
-        
-
-        this.staminaCounter();
+        });        
 
     }
 
@@ -169,12 +169,46 @@ class Game {
     staminaCounter() {
         if (this.frames % 75 === 0) {
             this.blueArmy.forEach((bluesoldier) => {
-                bluesoldier.stamina ++
+                bluesoldier.stamina ++;
             });
             this.redArmy.forEach((redsoldier) => {
-                redsoldier.stamina ++
+                redsoldier.stamina ++;
             });
           console.log(this.stamina);
         }
+    }
+
+    productionCounter() {
+        if (this.frames % 400 === 0) {
+            this.baseArray.forEach((base) => {
+                if (base.faction === 'neutral') {
+                    base.production = 0;
+                }
+                else {
+                    base.production ++;
+                }
+            });
+            console.log(`Production increased on all bases`)
+        }
+    }
+
+    unitProduction() {
+        this.baseArray.forEach((base) => {
+            if (base.production >= 2) {
+                base.production = 0;
+                if (base.faction === 'blue') {
+                    this.soldiers = new BlueSoldier(this, 'blue', Math.floor(Math.random() * 3) + 1, base.x, base.y, 100, 100, base.gps, 10, 'right', false, 3);
+                    let newSoldier = this.soldiers;
+                    this.blueArmy.push(newSoldier);
+                    console.log(`Blue unit created on ${base.x} and ${base.y}`);
+                }
+                else if (base.faction === 'red') {
+                    this.soldiers = new RedSoldier(this, 'red', Math.floor(Math.random() * 3) + 1, base.x, base.y, 100, 100, base.gps, 10, 'left', false, 3);
+                    let newSoldier = this.soldiers;
+                    this.redArmy.push(newSoldier);
+                    console.log(`Red unit created on ${base.x} and ${base.y}`);
+                }
+            }
+        }); 
     }
 }

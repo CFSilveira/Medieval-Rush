@@ -30,16 +30,31 @@ class Controls {
                         if (this.blueArmy[i].stamina < 5) {
                             break;
                         }
-                        console.log(`Unit on square ${this.blueArmy[i].gps} moves right`);
-                        this.blueArmy[i].facing = 'right';
-                        this.blueArmy[i].x += 100;
-                        this.blueArmy[i].stamina = 0;
-                        this.blueArmy[i].gps = (this.blueArmy[i].x / 100).toString() + (this.blueArmy[i].y / 100).toString();
-                        this.redArmy.forEach((redsoldier) => {
-                            if (redsoldier.gps === this.blueArmy[i].gps) {
-                                console.log('Ouch!');
+                        let futurePosition = ((this.blueArmy[i].x + 100) / 100).toString() + (this.blueArmy[i].y / 100).toString();
+                        let friendlyFire;
+                        this.blueArmy.forEach((bluesoldier) => {
+                            if (bluesoldier.gps === futurePosition) {
+                                friendlyFire = true;                                
                             }
-                        });  
+                        });
+                        let enemyFire;
+                        this.redArmy.forEach((redsoldier) => {
+                            if (redsoldier.gps === futurePosition) {
+                                enemyFire = true;                                
+                            }
+                        });
+                        if (friendlyFire === true) {
+                            console.log('Cannot move there');
+                        } else if (enemyFire === true) {
+                            console.log('Fight!');
+                        } else {
+                            console.log(`Unit on square ${this.blueArmy[i].gps} moves right to ${futurePosition}`);
+                            this.blueArmy[i].facing = 'right';
+                            this.blueArmy[i].x += 100;
+                            this.blueArmy[i].stamina = 0;
+                            this.blueArmy[i].gps = (this.blueArmy[i].x / 100).toString() + (this.blueArmy[i].y / 100).toString();
+                        }
+
                     }
                 }
                 break;
@@ -51,7 +66,9 @@ class Controls {
                         if (this.blueArmy[i].stamina < 5) {
                             break;
                         }
-                        console.log(`Unit on square ${this.blueArmy[i].gps} moves left`);
+                        let futurePosition = ((this.blueArmy[i].x - 100) / 100).toString() + (this.blueArmy[i].y / 100).toString();
+                        let friendlyFire;
+                        console.log(`Unit on square ${this.blueArmy[i].gps} moves left to ${futurePosition}`);
                         this.blueArmy[i].facing = 'left';
                         this.blueArmy[i].x -= 100;
                         this.blueArmy[i].stamina = 0;
