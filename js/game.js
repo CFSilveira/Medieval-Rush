@@ -156,7 +156,9 @@ class Game {
             if (redsoldier.isSelected) {
                 redsoldier.drawSquare();
             }
-        });        
+        });
+        
+        this.checkGameOver();
 
     }
 
@@ -167,7 +169,7 @@ class Game {
     }
 
     staminaCounter() {
-        if (this.frames % 75 === 0) {
+        if (this.frames % 10 === 0) {
             this.blueArmy.forEach((bluesoldier) => {
                 bluesoldier.stamina ++;
             });
@@ -200,15 +202,47 @@ class Game {
                     this.soldiers = new BlueSoldier(this, 'blue', Math.floor(Math.random() * 3) + 1, base.x, base.y, 100, 100, base.gps, 10, 'right', false, 3);
                     let newSoldier = this.soldiers;
                     this.blueArmy.push(newSoldier);
-                    console.log(`Blue unit created on ${base.x} and ${base.y}`);
+                    for (let j = 0; j < this.blueArmy.length - 1; j++) {
+                        if (base.gps === this.blueArmy[j].gps) {
+                        console.log(`Cannot create a new unit on position ${base.gps}!`);
+                        this.blueArmy.pop();
+                        }
+                    }
                 }
                 else if (base.faction === 'red') {
                     this.soldiers = new RedSoldier(this, 'red', Math.floor(Math.random() * 3) + 1, base.x, base.y, 100, 100, base.gps, 10, 'left', false, 3);
                     let newSoldier = this.soldiers;
                     this.redArmy.push(newSoldier);
-                    console.log(`Red unit created on ${base.x} and ${base.y}`);
+                    for (let j = 0; j < this.redArmy.length - 1; j++) {
+                        if (base.gps === this.redArmy[j].gps) {
+                        console.log(`Cannot create a new unit on position ${base.gps}!`);
+                        this.redArmy.pop();
+                        }
+                    }
                 }
             }
         }); 
     }
+
+    checkGameOver() {
+        let redBases = 0;
+        let blueBases = 0; 
+        this.baseArray.forEach((base) => {
+            if (base.faction === 'red') {
+                redBases ++;
+            }
+            else if (base.faction === 'blue') {
+                blueBases ++;
+            }
+        });
+
+        if (this.blueArmy.length + blueBases === 0 || this.redArmy.length + redBases === 0) {
+            this.stop();
+        }
+    }
+
+    stop() {
+        clearInterval(this.intervalId);
+      }
+
 }

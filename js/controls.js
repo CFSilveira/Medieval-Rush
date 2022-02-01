@@ -3,6 +3,7 @@ class Controls {
       this.game = game;
       this.blueArmy = this.game.blueArmy;
       this.redArmy = this.game.redArmy;
+      this.baseArray = this.game.baseArray;
     }
 
     keyboardEvents() {
@@ -37,22 +38,28 @@ class Controls {
                                 friendlyFire = true;                                
                             }
                         });
-                        let enemyFire;
+                        let enemy;
                         this.redArmy.forEach((redsoldier) => {
                             if (redsoldier.gps === futurePosition) {
-                                enemyFire = true;                                
+                                enemy = redsoldier;                                
                             }
                         });
                         if (friendlyFire === true) {
                             console.log('Cannot move there');
-                        } else if (enemyFire === true) {
+                        } else if (enemy) {
                             console.log('Fight!');
+                            this.fight(this.blueArmy[i], enemy);
                         } else {
                             console.log(`Unit on square ${this.blueArmy[i].gps} moves right to ${futurePosition}`);
                             this.blueArmy[i].facing = 'right';
                             this.blueArmy[i].x += 100;
                             this.blueArmy[i].stamina = 0;
                             this.blueArmy[i].gps = (this.blueArmy[i].x / 100).toString() + (this.blueArmy[i].y / 100).toString();
+                            this.baseArray.forEach((base) => {
+                                if (base.gps === futurePosition) {
+                                    base.faction = 'blue';
+                                }
+                            });
                         }
 
                     }
@@ -68,18 +75,36 @@ class Controls {
                         }
                         let futurePosition = ((this.blueArmy[i].x - 100) / 100).toString() + (this.blueArmy[i].y / 100).toString();
                         let friendlyFire;
+                        this.blueArmy.forEach((bluesoldier) => {
+                            if (bluesoldier.gps === futurePosition) {
+                                friendlyFire = true;                                
+                            }
+                        });
+                        let enemy;
+                        this.redArmy.forEach((redsoldier) => {
+                            if (redsoldier.gps === futurePosition) {
+                                enemy = redsoldier;                                
+                            }
+                        });
+                        if (friendlyFire === true) {
+                            console.log('Cannot move there');
+                        } else if (enemy) {
+                            console.log('Fight!');
+                            this.fight(this.blueArmy[i], enemy);
+                        } else {
                         console.log(`Unit on square ${this.blueArmy[i].gps} moves left to ${futurePosition}`);
                         this.blueArmy[i].facing = 'left';
                         this.blueArmy[i].x -= 100;
                         this.blueArmy[i].stamina = 0;
                         this.blueArmy[i].gps = (this.blueArmy[i].x / 100).toString() + (this.blueArmy[i].y / 100).toString();
-                        this.redArmy.forEach((redsoldier) => {
-                            if (redsoldier.gps === this.blueArmy[i].gps) {
-                                console.log('Ouch!');
+                        this.baseArray.forEach((base) => {
+                            if (base.gps === futurePosition) {
+                                base.faction = 'blue';
                             }
-                    });  
+                        });
                 }
             }
+        }
                 break;
 
             case 'KeyW':
@@ -89,17 +114,37 @@ class Controls {
                         if (this.blueArmy[i].stamina < 5) {
                             break;
                         }
-                        console.log(`Unit on square ${this.blueArmy[i].gps} moves up`);
+                        let futurePosition = (this.blueArmy[i].x / 100).toString() + ((this.blueArmy[i].y - 100) / 100).toString();
+                        let friendlyFire;
+                        this.blueArmy.forEach((bluesoldier) => {
+                            if (bluesoldier.gps === futurePosition) {
+                                friendlyFire = true;                                
+                            }
+                        });
+                        let enemy;
+                        this.redArmy.forEach((redsoldier) => {
+                            if (redsoldier.gps === futurePosition) {
+                                enemy = redsoldier;                                
+                            }
+                        });
+                        if (friendlyFire === true) {
+                            console.log('Cannot move there');
+                        } else if (enemy) {
+                            console.log('Fight!');
+                            this.fight(this.blueArmy[i], enemy);
+                        } else {
+                        console.log(`Unit on square ${this.blueArmy[i].gps} moves up to ${futurePosition}`);
                         this.blueArmy[i].y -= 100;
                         this.blueArmy[i].stamina = 0;
                         this.blueArmy[i].gps = (this.blueArmy[i].x / 100).toString() + (this.blueArmy[i].y / 100).toString()
-                        this.redArmy.forEach((redsoldier) => {
-                            if (redsoldier.gps === this.blueArmy[i].gps) {
-                                console.log('Ouch!');
+                        this.baseArray.forEach((base) => {
+                            if (base.gps === futurePosition) {
+                                base.faction = 'blue';
                             }
-                    });  
+                        });
                 }
             }
+        }
                 break;
 
             case 'KeyS':
@@ -109,17 +154,37 @@ class Controls {
                         if (this.blueArmy[i].stamina < 5) {
                             break;
                         }
-                        console.log(`Unit on square ${this.blueArmy[i].gps} moves down`);
+                        let futurePosition = (this.blueArmy[i].x / 100).toString() + ((this.blueArmy[i].y + 100) / 100).toString();
+                        let friendlyFire;
+                        this.blueArmy.forEach((bluesoldier) => {
+                            if (bluesoldier.gps === futurePosition) {
+                                friendlyFire = true;                                
+                            }
+                        });
+                        let enemy;
+                        this.redArmy.forEach((redsoldier) => {
+                            if (redsoldier.gps === futurePosition) {
+                                enemy = redsoldier;                                
+                            }
+                        });
+                        if (friendlyFire === true) {
+                            console.log('Cannot move there');
+                        } else if (enemy) {
+                            console.log('Fight!');
+                            this.fight(this.blueArmy[i], enemy);
+                        } else {
+                        console.log(`Unit on square ${this.blueArmy[i].gps} moves down to ${futurePosition}`);
                         this.blueArmy[i].y += 100;
                         this.blueArmy[i].stamina = 0;
                         this.blueArmy[i].gps = (this.blueArmy[i].x / 100).toString() + (this.blueArmy[i].y / 100).toString()
-                        this.redArmy.forEach((redsoldier) => {
-                            if (redsoldier.gps === this.blueArmy[i].gps) {
-                                console.log('Ouch!');
+                        this.baseArray.forEach((base) => {
+                            if (base.gps === futurePosition) {
+                                base.faction = 'blue';
                             }
-                    });  
+                        });
                 }
             }
+        }
                 break;
 
             //red team movement
@@ -143,16 +208,38 @@ class Controls {
                         if (this.redArmy[i].stamina < 5) {
                             break;
                         }
-                        console.log(`Unit on square ${this.redArmy[i].gps} moves right`);
-                        this.redArmy[i].facing = 'right';
-                        this.redArmy[i].x += 100;
-                        this.redArmy[i].stamina = 0;
-                        this.redArmy[i].gps = (this.redArmy[i].x / 100).toString() + (this.redArmy[i].y / 100).toString()
-                        this.blueArmy.forEach((bluesoldier) => {
-                            if (bluesoldier.gps === this.redArmy[i].gps) {
-                                console.log('Ouch!');
+                        let futurePosition = ((this.redArmy[i].x + 100) / 100).toString() + (this.redArmy[i].y / 100).toString();
+                        let friendlyFire;
+                        this.redArmy.forEach((redsoldier) => {
+                            if (redsoldier.gps === futurePosition) {
+                                friendlyFire = true;                                
                             }
                         });
+                        let enemy;
+                        this.blueArmy.forEach((bluesoldier) => {
+                            if (bluesoldier.gps === futurePosition) {
+                                enemy = bluesoldier;                                
+                            }
+                        });
+                        if (friendlyFire === true) {
+                            console.log('Cannot move there');
+                        } else if (enemy) {
+                            console.log('Fight!');
+                            this.fight(this.redArmy[i], enemy);
+                        } else {
+                            console.log(`Unit on square ${this.redArmy[i].gps} moves right to ${futurePosition}`);
+                            this.redArmy[i].facing = 'right';
+                            this.redArmy[i].x += 100;
+                            this.redArmy[i].stamina = 0;
+                            this.redArmy[i].gps = (this.redArmy[i].x / 100).toString() + (this.redArmy[i].y / 100).toString();
+                            this.baseArray.forEach((base) => {
+                                if (base.gps === futurePosition) {
+                                    base.faction = 'red';
+                                }
+                            });
+
+                        }
+
                     }
                 }
                 break;
@@ -164,18 +251,38 @@ class Controls {
                         if (this.redArmy[i].stamina < 5) {
                             break;
                         }
-                        console.log(`Unit on square ${this.redArmy[i].gps} moves left`);
+                        let futurePosition = ((this.redArmy[i].x - 100) / 100).toString() + (this.redArmy[i].y / 100).toString();
+                        let friendlyFire;
+                        this.redArmy.forEach((redsoldier) => {
+                            if (redsoldier.gps === futurePosition) {
+                                friendlyFire = true;                                
+                            }
+                        });
+                        let enemy;
+                        this.blueArmy.forEach((bluesoldier) => {
+                            if (bluesoldier.gps === futurePosition) {
+                                enemy = bluesoldier;                                
+                            }
+                        });
+                        if (friendlyFire === true) {
+                            console.log('Cannot move there');
+                        } else if (enemy) {
+                            console.log('Fight!');
+                            this.fight(this.redArmy[i], enemy);
+                        } else {
+                        console.log(`Unit on square ${this.redArmy[i].gps} moves left to ${futurePosition}`);
                         this.redArmy[i].facing = 'left';
                         this.redArmy[i].x -= 100;
                         this.redArmy[i].stamina = 0;
                         this.redArmy[i].gps = (this.redArmy[i].x / 100).toString() + (this.redArmy[i].y / 100).toString()
-                        this.blueArmy.forEach((bluesoldier) => {
-                            if (bluesoldier.gps === this.redArmy[i].gps) {
-                                console.log('Ouch!');
+                        this.baseArray.forEach((base) => {
+                            if (base.gps === futurePosition) {
+                                base.faction = 'red';
                             }
                         });
                         }
                     }
+                }
                 break;
 
             case 'ArrowUp':
@@ -185,17 +292,37 @@ class Controls {
                         if (this.redArmy[i].stamina < 5) {
                             break;
                         }
-                        console.log(`Unit on square ${this.redArmy[i].gps} moves up`);
+                        let futurePosition = (this.redArmy[i].x / 100).toString() + ((this.redArmy[i].y - 100) / 100).toString();
+                        let friendlyFire;
+                        this.redArmy.forEach((redsoldier) => {
+                            if (redsoldier.gps === futurePosition) {
+                                friendlyFire = true;                                
+                            }
+                        });
+                        let enemy;
+                        this.blueArmy.forEach((bluesoldier) => {
+                            if (bluesoldier.gps === futurePosition) {
+                                enemy = bluesoldier;                                
+                            }
+                        });
+                        if (friendlyFire === true) {
+                            console.log('Cannot move there');
+                        } else if (enemy) {
+                            console.log('Fight!');
+                            this.fight(this.redArmy[i], enemy);
+                        } else {
+                        console.log(`Unit on square ${this.redArmy[i].gps} moves up to ${futurePosition}`);
                         this.redArmy[i].y -= 100;
                         this.redArmy[i].stamina = 0;
                         this.redArmy[i].gps = (this.redArmy[i].x / 100).toString() + (this.redArmy[i].y / 100).toString()
-                        this.blueArmy.forEach((bluesoldier) => {
-                            if (bluesoldier.gps === this.redArmy[i].gps) {
-                                console.log('Ouch!');
+                        this.baseArray.forEach((base) => {
+                            if (base.gps === futurePosition) {
+                                base.faction = 'red';
                             }
                         });
                         }
                     }
+                }
                 break;
 
             case 'ArrowDown':
@@ -205,21 +332,104 @@ class Controls {
                         if (this.redArmy[i].stamina < 5) {
                             break;
                         }
-                        console.log(`Unit on square ${this.redArmy[i].gps} moves down`);
+                        let futurePosition = (this.redArmy[i].x / 100).toString() + ((this.redArmy[i].y + 100) / 100).toString();
+                        let friendlyFire;
+                        this.redArmy.forEach((redsoldier) => {
+                            if (redsoldier.gps === futurePosition) {
+                                friendlyFire = true;                                
+                            }
+                        });
+                        let enemy;
+                        this.blueArmy.forEach((bluesoldier) => {
+                            if (bluesoldier.gps === futurePosition) {
+                                enemy = bluesoldier;                                
+                            }
+                        });
+                        if (friendlyFire === true) {
+                            console.log('Cannot move there');
+                        } else if (enemy) {
+                            console.log('Fight!');
+                            this.fight(this.redArmy[i], enemy);
+                        } else {
+                        console.log(`Unit on square ${this.redArmy[i].gps} moves down to ${futurePosition}`);
                         this.redArmy[i].y += 100;
                         this.redArmy[i].stamina = 0;
                         this.redArmy[i].gps = (this.redArmy[i].x / 100).toString() + (this.redArmy[i].y / 100).toString()
-                        this.blueArmy.forEach((bluesoldier) => {
-                            if (bluesoldier.gps === this.redArmy[i].gps) {
-                                console.log('Ouch!');
+                        this.baseArray.forEach((base) => {
+                            if (base.gps === futurePosition) {
+                                base.faction = 'red';
                             }
                         });
                         }
                     }
+                }
                 break;
           }
           });
         }
+    
+    fight(attacker, defender){
+        let fightResult = 0;
+        //calculate battle results, units deal twice/half dmg depending on who attacks/defends
+        if (attacker.type === 1) {
+            switch (defender.type) {
+                case 1:
+                    fightResult = attacker.hp - defender.hp;
+                    break;
+                case 2:
+                    fightResult = (attacker.hp*2) - defender.hp;
+                    break;
+                case 3:
+                    fightResult = (attacker.hp/2) - defender.hp;
+                    break; 
+            }
+        }
+        else if (attacker.type === 2) {
+            switch (defender.type) {
+                case 1:
+                    fightResult = (attacker.hp/2) - defender.hp;
+                    break;
+                case 2:
+                    fightResult = attacker.hp - defender.hp;
+                    break;
+                case 3:
+                    fightResult = (attacker.hp*2) - defender.hp;
+                    break; 
+            }
+        }
+        else {
+            switch (defender.type) {
+                case 1:
+                    fightResult = (attacker.hp*2) - defender.hp;
+                    break;
+                case 2:
+                    fightResult = (attacker.hp/2) - defender.hp;
+                    break;
+                case 3:
+                    fightResult = attacker.hp - defender.hp;
+                    break; 
+            }
+        }
+
+        if (fightResult > 0) {
+            console.log('Attacker wins!');
+
+
+
+        }
+        else if (fightResult < 0) {
+            console.log('Defender wins!');
+
+        }
+        else if (fightResult === 0) {
+            console.log('Units destroyed each other...');
+
+        }
+
+
+
+
+    }
     
 }
     
