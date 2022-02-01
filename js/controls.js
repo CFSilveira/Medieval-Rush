@@ -27,6 +27,9 @@ class Controls {
                 console.log('D pressed');
                 for (let i = 0; i < this.blueArmy.length; i++){
                     if (this.blueArmy[i].isSelected) {
+                        if (this.blueArmy[i].stamina < 5) {
+                            break;
+                        }
                         console.log(`Unit on square ${this.blueArmy[i].gps} moves right`);
                         this.blueArmy[i].facing = 'right';
                         this.blueArmy[i].x += 100;
@@ -45,6 +48,9 @@ class Controls {
                 console.log('A pressed');
                 for (let i = 0; i < this.blueArmy.length; i++){
                     if (this.blueArmy[i].isSelected) {
+                        if (this.blueArmy[i].stamina < 5) {
+                            break;
+                        }
                         console.log(`Unit on square ${this.blueArmy[i].gps} moves left`);
                         this.blueArmy[i].facing = 'left';
                         this.blueArmy[i].x -= 100;
@@ -63,6 +69,9 @@ class Controls {
                 console.log('W pressed');
                 for (let i = 0; i < this.blueArmy.length; i++){
                     if (this.blueArmy[i].isSelected) {
+                        if (this.blueArmy[i].stamina < 5) {
+                            break;
+                        }
                         console.log(`Unit on square ${this.blueArmy[i].gps} moves up`);
                         this.blueArmy[i].y -= 100;
                         this.blueArmy[i].stamina = 0;
@@ -80,6 +89,9 @@ class Controls {
                 console.log('S pressed');
                 for (let i = 0; i < this.blueArmy.length; i++){
                     if (this.blueArmy[i].isSelected) {
+                        if (this.blueArmy[i].stamina < 5) {
+                            break;
+                        }
                         console.log(`Unit on square ${this.blueArmy[i].gps} moves down`);
                         this.blueArmy[i].y += 100;
                         this.blueArmy[i].stamina = 0;
@@ -111,6 +123,9 @@ class Controls {
                 console.log('Right arrow pressed');
                 for (let i = 0; i < this.redArmy.length; i++){
                     if (this.redArmy[i].isSelected) {
+                        if (this.redArmy[i].stamina < 5) {
+                            break;
+                        }
                         console.log(`Unit on square ${this.redArmy[i].gps} moves right`);
                         this.redArmy[i].facing = 'right';
                         this.redArmy[i].x += 100;
@@ -129,6 +144,9 @@ class Controls {
                 console.log('Left arrow pressed');
                 for (let i = 0; i < this.redArmy.length; i++){
                     if (this.redArmy[i].isSelected) {
+                        if (this.redArmy[i].stamina < 5) {
+                            break;
+                        }
                         console.log(`Unit on square ${this.redArmy[i].gps} moves left`);
                         this.redArmy[i].facing = 'left';
                         this.redArmy[i].x -= 100;
@@ -147,6 +165,9 @@ class Controls {
                 console.log('Up arrow pressed');
                 for (let i = 0; i < this.redArmy.length; i++){
                     if (this.redArmy[i].isSelected) {
+                        if (this.redArmy[i].stamina < 5) {
+                            break;
+                        }
                         console.log(`Unit on square ${this.redArmy[i].gps} moves up`);
                         this.redArmy[i].y -= 100;
                         this.redArmy[i].stamina = 0;
@@ -164,6 +185,9 @@ class Controls {
                 console.log('Down arrow pressed');
                 for (let i = 0; i < this.redArmy.length; i++){
                     if (this.redArmy[i].isSelected) {
+                        if (this.redArmy[i].stamina < 5) {
+                            break;
+                        }
                         console.log(`Unit on square ${this.redArmy[i].gps} moves down`);
                         this.redArmy[i].y += 100;
                         this.redArmy[i].stamina = 0;

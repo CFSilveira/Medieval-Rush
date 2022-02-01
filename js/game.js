@@ -167,9 +167,12 @@ class Game {
     }
 
     staminaCounter() {
-        if (this.frames % 300 === 0) {
+        if (this.frames % 75 === 0) {
             this.blueArmy.forEach((bluesoldier) => {
                 bluesoldier.stamina ++
+            });
+            this.redArmy.forEach((redsoldier) => {
+                redsoldier.stamina ++
             });
           console.log(this.stamina);
         }
