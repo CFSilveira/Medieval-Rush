@@ -127,6 +127,7 @@ class Game {
         });
         
         this.staminaCounter();
+        //this.regeneration();
         this.productionCounter();
         this.unitProduction();
         this.frames++;
@@ -176,7 +177,22 @@ class Game {
             this.redArmy.forEach((redsoldier) => {
                 redsoldier.stamina ++;
             });
-          console.log(this.stamina);
+               
+            this.blueArmy.forEach((bluesoldier) => {
+                if (bluesoldier.stamina > 10 && bluesoldier.hp < 10 && bluesoldier.hp > 0.4) {
+                    bluesoldier.stamina = 5;
+                    bluesoldier.hp = bluesoldier.hp + 0.5;
+                    console.log(`Blue unit on position ${bluesoldier.gps} recovered 0.5 HP.`)
+                }
+            });
+
+            this.redArmy.forEach((redsoldier) => {
+                if (redsoldier.stamina > 10 && redsoldier.hp < 10 && redsoldier.hp > 0.4) {
+                    redsoldier.stamina = 5;
+                    redsoldier.hp = redsoldier.hp + 0.5;
+                    console.log(`Blue unit on position ${redsoldier.gps} recovered 0.5 HP.`)
+                }
+            });
         }
     }
 
@@ -238,6 +254,7 @@ class Game {
 
         if (this.blueArmy.length + blueBases === 0 || this.redArmy.length + redBases === 0) {
             this.stop();
+            console.log("Game Over");
         }
     }
     
