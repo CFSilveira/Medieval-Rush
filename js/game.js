@@ -240,6 +240,7 @@ class Game {
             this.stop();
         }
     }
+    
 
     stop() {
         clearInterval(this.intervalId);

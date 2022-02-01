@@ -370,17 +370,31 @@ class Controls {
     
     fight(attacker, defender){
         let fightResult = 0;
+        let attackerHP = 0;
+        let defenderHP = 0;
         //calculate battle results, units deal twice/half dmg depending on who attacks/defends
         if (attacker.type === 1) {
             switch (defender.type) {
                 case 1:
                     fightResult = attacker.hp - defender.hp;
+                    attackerHP = attacker.hp - defender.hp;
+                    defenderHP = defender.hp - attacker.hp;
+                    attacker.hp = attackerHP;
+                    defender.hp = defenderHP;
                     break;
                 case 2:
                     fightResult = (attacker.hp*2) - defender.hp;
+                    attackerHP = (attacker.hp*2) - defender.hp;
+                    defenderHP = defender.hp - (attacker.hp*2);
+                    attacker.hp = attackerHP;
+                    defender.hp = defenderHP;
                     break;
                 case 3:
                     fightResult = (attacker.hp/2) - defender.hp;
+                    attackerHP = (attacker.hp/2) - defender.hp;
+                    defenderHP = defender.hp - (attacker.hp/2);
+                    attacker.hp = attackerHP;
+                    defender.hp = defenderHP;
                     break; 
             }
         }
@@ -388,12 +402,24 @@ class Controls {
             switch (defender.type) {
                 case 1:
                     fightResult = (attacker.hp/2) - defender.hp;
+                    attackerHP = (attacker.hp/2) - defender.hp;
+                    defenderHP = defender.hp - (attacker.hp/2);
+                    attacker.hp = attackerHP;
+                    defender.hp = defenderHP;
                     break;
                 case 2:
                     fightResult = attacker.hp - defender.hp;
+                    attackerHP = attacker.hp - defender.hp;
+                    defenderHP = defender.hp - attacker.hp;
+                    attacker.hp = attackerHP;
+                    defender.hp = defenderHP;
                     break;
                 case 3:
                     fightResult = (attacker.hp*2) - defender.hp;
+                    attackerHP = (attacker.hp*2) - defender.hp;
+                    defenderHP = defender.hp - (attacker.hp*2);
+                    attacker.hp = attackerHP;
+                    defender.hp = defenderHP;
                     break; 
             }
         }
@@ -401,30 +427,95 @@ class Controls {
             switch (defender.type) {
                 case 1:
                     fightResult = (attacker.hp*2) - defender.hp;
+                    attackerHP = (attacker.hp*2) - defender.hp;
+                    defenderHP = defender.hp - (attacker.hp*2);
+                    attacker.hp = attackerHP;
+                    defender.hp = defenderHP;
                     break;
                 case 2:
                     fightResult = (attacker.hp/2) - defender.hp;
+                    attackerHP = (attacker.hp/2) - defender.hp;
+                    defenderHP = defender.hp - (attacker.hp/2);
+                    attacker.hp = attackerHP;
+                    defender.hp = defenderHP;
                     break;
                 case 3:
                     fightResult = attacker.hp - defender.hp;
+                    attackerHP = attacker.hp - defender.hp;
+                    defenderHP = defender.hp - attacker.hp;
+                    attacker.hp = attackerHP;
+                    defender.hp = defenderHP;
                     break; 
             }
         }
 
         if (fightResult > 0) {
             console.log('Attacker wins!');
-
-
-
+            if (attacker.faction === 'blue') {
+                let index = this.redArmy.indexOf(defender);
+                this.redArmy.splice(index, 1);
+                let nextUnit = (index+1) % this.redArmy.length;
+                this.redArmy[nextUnit].isSelected = true;
+            }
+            else if (attacker.faction === 'red') {
+                let index = this.blueArmy.indexOf(defender);
+                this.blueArmy.splice(index, 1);
+                let nextUnit = (index+1) % this.blueArmy.length;
+                this.blueArmy[nextUnit].isSelected = true;
+            }
         }
         else if (fightResult < 0) {
             console.log('Defender wins!');
+            if (attacker.faction === 'red') {
+                let index = this.redArmy.indexOf(attacker);
+                this.redArmy.splice(index, 1);
+                let nextUnit = (index+1) % this.redArmy.length;
+                this.redArmy[nextUnit].isSelected = true;
+            }
+            else if (attacker.faction === 'blue') {
+                let index = this.blueArmy.indexOf(attacker);
+                this.blueArmy.splice(index, 1);
+                let nextUnit = (index+1) % this.blueArmy.length;
+                this.blueArmy[nextUnit].isSelected = true;
+            }
 
         }
-        else if (fightResult === 0) {
+        else if (fightResult > 0 && fightResult < 1) {
             console.log('Units destroyed each other...');
+            if (attacker.faction === 'red') {
+                let index = this.redArmy.indexOf(attacker);
+                this.redArmy.splice(index, 1);
+                let nextUnit = (index+1) % this.redArmy.length;
+                this.redArmy[nextUnit].isSelected = true;
+                index = this.blueArmy.indexOf(defender);
+                this.blueArmy.splice(index, 1);
+                let nextUnit2 = (index+1) % this.blueArmy.length;
+                this.blueArmy[nextUnit2].isSelected = true;
+            }
+            else if (attacker.faction === 'blue') {
+                let index = this.blueArmy.indexOf(attacker);
+                this.blueArmy.splice(index, 1);
+                let nextUnit = (index+1) % this.blueArmy.length;
+                this.blueArmy[nextUnit].isSelected = true;
+                index = this.redArmy.indexOf(defender);
+                this.redArmy.splice(index, 1);
+                let nextUnit2 = (index+1) % this.redArmy.length;
+                this.redArmy[nextUnit2].isSelected = true;
+            }
 
         }
+        
+
+        if (attacker.hp < 1) {
+            switch (attacker.faction) {
+                case 'blue':
+                    let index = this.blueArmy.indexOf(attacker);
+                    this.blueArmy.splice(index, 1);
+                    let nextUnit = (index+1) % this.blueArmy.length;
+                    this.blueArmy[nextUnit].isSelected = true;
+            }
+        }
+        
 
 
 
