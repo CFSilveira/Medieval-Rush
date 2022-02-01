@@ -9,10 +9,11 @@ class Game {
         this.canvasWidth = 1200;
         this.canvasHeight = 800;
         this.intervalId = null;
-        this.fullArmy = [];
         this.blueArmy = [];
         this.redArmy = [];
+        this.baseArray = [];
         this.stamina = 0;
+        this.production = 0;
 
     }
 
@@ -27,11 +28,12 @@ class Game {
             let gps = xAxis.toString() + yAxis.toString()
             xAxis = xAxis * 100;
             yAxis = yAxis * 100;
+            let stamina = 5;
             if (i < 4) {
-                this.soldiers = new BlueSoldier(this, 'blue', typeOfSoldier, xAxis, yAxis, 100, 100, gps, 10, 'right', false);
+                this.soldiers = new BlueSoldier(this, 'blue', typeOfSoldier, xAxis, yAxis, 100, 100, gps, 10, 'right', false, stamina);
             }
             else {
-                this.soldiers = new BlueSoldier(this, 'blue', typeOfSoldier, xAxis, yAxis, 100, 100, gps, 10, 'right', true);
+                this.soldiers = new BlueSoldier(this, 'blue', typeOfSoldier, xAxis, yAxis, 100, 100, gps, 10, 'right', true, stamina);
             }
             let newSoldier = this.soldiers;
             //checking if there is another soldier on that square
@@ -46,7 +48,6 @@ class Game {
 
             
         }
-        this.fullArmy.push(this.blueArmy);
         console.log(`Blue Army: `, this.blueArmy);
 
         //random creation and positioning of red units
@@ -57,11 +58,12 @@ class Game {
             let gps = xAxis.toString() + yAxis.toString()
             xAxis = xAxis * 100;
             yAxis = yAxis * 100;
+            let stamina = 5;
             if (i < 4) {
-                this.soldiers = new RedSoldier(this, 'red', typeOfSoldier, xAxis, yAxis, 100, 100, gps, 10, 'left', false);
+                this.soldiers = new RedSoldier(this, 'red', typeOfSoldier, xAxis, yAxis, 100, 100, gps, 10, 'left', false, stamina);
             }
             else {
-                this.soldiers = new RedSoldier(this, 'red', typeOfSoldier, xAxis, yAxis, 100, 100, gps, 10, 'left', true);
+                this.soldiers = new RedSoldier(this, 'red', typeOfSoldier, xAxis, yAxis, 100, 100, gps, 10, 'left', true, stamina);
             }
             let newSoldier = this.soldiers;
             //checking if there is another soldier on that square
@@ -74,9 +76,41 @@ class Game {
                 }
             }
         }
-        this.fullArmy.push(this.redArmy);
         console.log(`Red Army: `, this.redArmy);
-        console.log(`Full Army: `, this.fullArmy);
+
+        //random creation and positioning of blue, neutral and red bases - improved the unit creation method
+        for (let i = 1; i <= 6; i++) {
+            let xAxis = Math.floor(Math.random() * 4);
+            if (i >= 4) {xAxis = xAxis + 7};
+            let yAxis = Math.floor(Math.random() * 6) + 1;
+            let gps = xAxis.toString() + yAxis.toString()
+            xAxis = xAxis * 100;
+            yAxis = yAxis * 100;
+            if (i <= 2) {
+                this.bases = new Bases(this, 'blue', xAxis, yAxis, 100, 100, gps, 0);
+            }
+            else if (i === 3) {
+                this.bases = new Bases(this, 'neutral', xAxis, yAxis, 100, 100, gps, 0);
+            }
+            else if (i === 4) {
+                this.bases = new Bases(this, 'neutral', xAxis, yAxis, 100, 100, gps, 0);
+            }
+            else if (i > 4) {
+                this.bases = new Bases(this, 'red', xAxis, yAxis, 100, 100, gps, 0);
+            }
+            let newBase = this.bases;
+            //checking if there is another soldier on that square
+            this.baseArray.push(newBase);
+            for (let j = 0; j < this.baseArray.length - 1; j++) {
+                if (gps === this.baseArray[j].gps) {
+                console.log(`There is already a base on position ${gps}. Duplicate removed!`);
+                i--;
+                this.baseArray.pop();
+                }
+            }
+
+        }
+        console.log('Bases: ', this.baseArray);
 
         const controls = new Controls(this);
         controls.keyboardEvents();
@@ -88,12 +122,18 @@ class Game {
 
     update() {
         this.drawBackground();
+        this.baseArray.forEach((base) => {
+            base.draw()
+        });
+        
         this.frames++;
 
-        //draws all the blue units
+        //draws all the blue units and stamina status
         this.blueArmy.forEach((bluesoldier) => {
             bluesoldier.draw();
+            bluesoldier.drawStamina();            
         });
+        
 
         //draws a blue square around the selected unit
         this.blueArmy.forEach((bluesoldier) => {
@@ -102,9 +142,10 @@ class Game {
             }
         });
 
-        //draws all the red units
+        //draws all the red units and stamina status
         this.redArmy.forEach((redsoldier) => {
             redsoldier.draw();
+            redsoldier.drawStamina();
         });
 
         //draws a red square around the selected unit
@@ -114,7 +155,6 @@ class Game {
             }
         });
         
-
 
         this.staminaCounter();
 
@@ -128,7 +168,9 @@ class Game {
 
     staminaCounter() {
         if (this.frames % 300 === 0) {
-          this.stamina ++;
+            this.blueArmy.forEach((bluesoldier) => {
+                bluesoldier.stamina ++
+            });
           console.log(this.stamina);
         }
     }

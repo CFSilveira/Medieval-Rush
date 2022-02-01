@@ -1,5 +1,5 @@
 class Soldiers {
-    constructor(game, type, x, y, width, height, gps, hp, facing, isSelected) {
+    constructor(game, type, x, y, width, height, gps, hp, facing, isSelected, stamina) {
         this.game = game;
         this.type = type;
         this.x = x;
@@ -10,8 +10,10 @@ class Soldiers {
         this.hp = hp;
         this.facing = facing;
         this.isSelected = isSelected;
+        this.stamina = stamina;
         this.img = new Image();
         this.square = new Image();
+        this.staminaFrame = new Image();
         this.canvas;
     }
 
@@ -62,12 +64,27 @@ class Soldiers {
 
         this.game.ctx.drawImage(this.square, this.x, this.y, 100, 100);
     }
+
+    drawStamina() {
+        //draws a hint that a unit is ready to be moved
+        if (this.stamina >= 5) {
+            this.staminaFrame.src = './images/staminag.png';            
+        }
+        else if (this.stamina > 2) {
+            this.staminaFrame.src = './images/staminay.png';
+        }
+        else if (this.stamina < 2) {
+            this.staminaFrame.src = './images/staminar.png';
+        }
+
+        this.game.ctx.drawImage(this.staminaFrame, this.x, this.y, 100, 100);
+    }
     
 }
 
 class BlueSoldier extends Soldiers {
-    constructor(game, faction, type, x, y, width, height, gps, hp, facing, isSelected) {
-        super(game, type, x, y, width, height, gps, hp, facing, isSelected);
+    constructor(game, faction, type, x, y, width, height, gps, hp, facing, isSelected, stamina) {
+        super(game, type, x, y, width, height, gps, hp, facing, isSelected, stamina);
         this.faction = 'blue';
     }
 
@@ -92,8 +109,8 @@ class BlueSoldier extends Soldiers {
 }
 
 class RedSoldier extends Soldiers {
-    constructor(game, faction, type, x, y, width, height, gps, hp, facing, isSelected) {
-        super(game, type, x, y, width, height, gps, hp, facing, isSelected);
+    constructor(game, faction, type, x, y, width, height, gps, hp, facing, isSelected, stamina) {
+        super(game, type, x, y, width, height, gps, hp, facing, isSelected, stamina);
         this.faction = 'red';
     }
 
