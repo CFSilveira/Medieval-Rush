@@ -1,4 +1,5 @@
 const btn = document.getElementById('start-button');
+const battlefield = Math.floor(Math.random() *3) + 1;
 
 window.onload = () => {
     document.getElementById('start-button').onclick = () => {

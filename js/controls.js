@@ -31,6 +31,10 @@ class Controls {
                         if (this.blueArmy[i].stamina < 5) {
                             break;
                         }
+                        if ((this.blueArmy[i].x + 100) > 1100) {
+                            console.log(`Can't move outside the battlefield`)
+                            break;
+                        }
                         let futurePosition = ((this.blueArmy[i].x + 100) / 100).toString() + (this.blueArmy[i].y / 100).toString();
                         let friendlyFire;
                         this.blueArmy.forEach((bluesoldier) => {
@@ -71,6 +75,10 @@ class Controls {
                 for (let i = 0; i < this.blueArmy.length; i++){
                     if (this.blueArmy[i].isSelected) {
                         if (this.blueArmy[i].stamina < 5) {
+                            break;
+                        }
+                        if ((this.blueArmy[i].x - 100) < 0) {
+                            console.log(`Can't move outside the battlefield`)
                             break;
                         }
                         let futurePosition = ((this.blueArmy[i].x - 100) / 100).toString() + (this.blueArmy[i].y / 100).toString();
@@ -114,6 +122,10 @@ class Controls {
                         if (this.blueArmy[i].stamina < 5) {
                             break;
                         }
+                        if ((this.blueArmy[i].y - 100) < 0) {
+                            console.log(`Can't move outside the battlefield`)
+                            break;
+                        }
                         let futurePosition = (this.blueArmy[i].x / 100).toString() + ((this.blueArmy[i].y - 100) / 100).toString();
                         let friendlyFire;
                         this.blueArmy.forEach((bluesoldier) => {
@@ -152,6 +164,10 @@ class Controls {
                 for (let i = 0; i < this.blueArmy.length; i++){
                     if (this.blueArmy[i].isSelected) {
                         if (this.blueArmy[i].stamina < 5) {
+                            break;
+                        }
+                        if ((this.blueArmy[i].y + 100) > 700) {
+                            console.log(`Can't move outside the battlefield`)
                             break;
                         }
                         let futurePosition = (this.blueArmy[i].x / 100).toString() + ((this.blueArmy[i].y + 100) / 100).toString();
@@ -208,6 +224,10 @@ class Controls {
                         if (this.redArmy[i].stamina < 5) {
                             break;
                         }
+                        if ((this.redArmy[i].x + 100) > 1100) {
+                            console.log(`Can't move outside the battlefield`)
+                            break;
+                        }
                         let futurePosition = ((this.redArmy[i].x + 100) / 100).toString() + (this.redArmy[i].y / 100).toString();
                         let friendlyFire;
                         this.redArmy.forEach((redsoldier) => {
@@ -251,6 +271,10 @@ class Controls {
                         if (this.redArmy[i].stamina < 5) {
                             break;
                         }
+                        if ((this.redArmy[i].x - 100) < 0) {
+                            console.log(`Can't move outside the battlefield`)
+                            break;
+                        }
                         let futurePosition = ((this.redArmy[i].x - 100) / 100).toString() + (this.redArmy[i].y / 100).toString();
                         let friendlyFire;
                         this.redArmy.forEach((redsoldier) => {
@@ -292,6 +316,10 @@ class Controls {
                         if (this.redArmy[i].stamina < 5) {
                             break;
                         }
+                        if ((this.redArmy[i].y - 100) < 0) {
+                            console.log(`Can't move outside the battlefield`)
+                            break;
+                        }
                         let futurePosition = (this.redArmy[i].x / 100).toString() + ((this.redArmy[i].y - 100) / 100).toString();
                         let friendlyFire;
                         this.redArmy.forEach((redsoldier) => {
@@ -330,6 +358,10 @@ class Controls {
                 for (let i = 0; i < this.redArmy.length; i++){
                     if (this.redArmy[i].isSelected) {
                         if (this.redArmy[i].stamina < 5) {
+                            break;
+                        }
+                        if ((this.redArmy[i].y + 100) > 700) {
+                            console.log(`Can't move outside the battlefield`)
                             break;
                         }
                         let futurePosition = (this.redArmy[i].x / 100).toString() + ((this.redArmy[i].y + 100) / 100).toString();
@@ -425,23 +457,27 @@ class Controls {
         //removes units with less than 0.5 HP
         this.blueArmy.forEach((bluesoldier) => {
             let index;
-            if (bluesoldier.hp < 0.5) {
+            if (bluesoldier.hp < 1) {
                 console.log('Blue unit killed!');
                 index = this.blueArmy.indexOf(bluesoldier);
                 this.blueArmy.splice(index, 1);
-                let nextUnit = (index+1) % this.blueArmy.length;
-                this.blueArmy[nextUnit].isSelected = true;
+                if (this.blueArmy.length > 0) {
+                    let nextUnit = (index+1) % this.blueArmy.length;
+                    this.blueArmy[nextUnit].isSelected = true;
+                }
             }
         });
 
         this.redArmy.forEach((redsoldier) => {
             let index;
-            if (redsoldier.hp < 0.5) {
+            if (redsoldier.hp < 1) {
                 console.log('Red unit killed!');
                 index = this.redArmy.indexOf(redsoldier);
                 this.redArmy.splice(index, 1);
-                let nextUnit = (index+1) % this.redArmy.length;
-                this.redArmy[nextUnit].isSelected = true;
+                if (this.redArmy.length > 0) {
+                    let nextUnit = (index+1) % this.redArmy.length;
+                    this.redArmy[nextUnit].isSelected = true;
+                } 
             }
         });  
 

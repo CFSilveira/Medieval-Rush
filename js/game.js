@@ -165,8 +165,18 @@ class Game {
 
 
     drawBackground() {
-        this.background.src = './images/background.png'        
-        this.ctx.drawImage(this.background, this.x, this.y, this.canvasWidth, this.canvasHeight);
+        if (battlefield === 1) {
+            this.background.src = './images/background.png'
+            this.ctx.drawImage(this.background, this.x, this.y, this.canvasWidth, this.canvasHeight);
+        }
+        else if (battlefield === 2) {
+            this.background.src = './images/background2.png'
+            this.ctx.drawImage(this.background, this.x, this.y, this.canvasWidth, this.canvasHeight);
+        }
+        else if (battlefield === 3) {
+            this.background.src = './images/background3.png'
+            this.ctx.drawImage(this.background, this.x, this.y, this.canvasWidth, this.canvasHeight);
+        }
     }
 
     staminaCounter() {
@@ -252,9 +262,13 @@ class Game {
             }
         });
 
-        if (this.blueArmy.length + blueBases === 0 || this.redArmy.length + redBases === 0) {
+        if (this.blueArmy.length + blueBases === 0) {
+            console.log(`RED WINS THE GAME`);
             this.stop();
-            console.log("Game Over");
+        }
+        else if (this.redArmy.length + redBases === 0) {
+            console.log(`BLUE WINS THE GAME`);
+            this.stop();
         }
     }
     
