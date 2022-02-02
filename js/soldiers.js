@@ -114,25 +114,6 @@ class BlueSoldier extends Soldiers {
         super(game, type, x, y, width, height, gps, hp, facing, isSelected, stamina);
         this.faction = 'blue';
     }
-
-/*     keyboardEvents() {
-        window.addEventListener('keydown', (e) => {
-          switch (e.code) {
-            case 'KeyD':
-                this.BlueSoldier.x += 100;
-                break;
-            case 'KeyA':
-                this.BlueSoldier.x -= 100;
-                break;
-            case 'KeyW':
-                this.BlueSoldier.y += 100;
-                break;
-            case 'KeyS':
-                this.BlueSoldier.y -= 100;
-                break;
-            }
-        });
-      } */
 }
 
 class RedSoldier extends Soldiers {
@@ -140,23 +121,4 @@ class RedSoldier extends Soldiers {
         super(game, type, x, y, width, height, gps, hp, facing, isSelected, stamina);
         this.faction = 'red';
     }
-
-    /* keyboardEvents() {
-        window.addEventListener('keydown', (e) => {
-          switch (e.code) {
-            case 'ArrowRight':
-                this.RedSoldier.x += 100;
-                break;
-            case 'ArrowLeft':
-                this.RedSoldier.x -= 100;
-                break;
-            case 'ArrowUp':
-                this.RedSoldier.y += 100;
-                break;
-            case 'ArrowDown':
-                this.RedSoldier.y -= 100;
-                break;
-            }
-        });
-      } */
 }
