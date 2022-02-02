@@ -111,6 +111,8 @@ class Game {
         }
         console.log('Bases: ', this.baseArray);
 
+        this.computer = new Computer(this);        
+
         const controls = new Controls(this);
         controls.keyboardEvents(); 
         this.intervalId = setInterval(() => {
@@ -130,13 +132,6 @@ class Game {
         this.unitProduction();
         this.frames++;
 
-        //draws all the blue units and stamina status
-        this.blueArmy.forEach((bluesoldier) => {
-            bluesoldier.draw();
-            bluesoldier.drawStamina();            
-        });
-        
-
         //draws a blue square around the selected unit
         this.blueArmy.forEach((bluesoldier) => {
             if (bluesoldier.isSelected) {
@@ -144,10 +139,10 @@ class Game {
             }
         });
 
-        //draws all the red units and stamina status
-        this.redArmy.forEach((redsoldier) => {
-            redsoldier.draw();
-            redsoldier.drawStamina();
+        //draws all the blue units and stamina status
+        this.blueArmy.forEach((bluesoldier) => {
+            bluesoldier.draw();
+            bluesoldier.drawStamina();            
         });
 
         //draws a red square around the selected unit
@@ -157,9 +152,15 @@ class Game {
             }
         });
         
+        //draws all the red units and stamina status
+        this.redArmy.forEach((redsoldier) => {
+            redsoldier.draw();
+            redsoldier.drawStamina();
+        });
+        
         this.checkGameOver();
 
-        badAi();
+        this.computer.badAi();
 
     }
 
