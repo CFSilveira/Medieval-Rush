@@ -115,7 +115,7 @@ class BlueSoldier extends Soldiers {
         this.faction = 'blue';
     }
 
-    keyboardEvents() {
+/*     keyboardEvents() {
         window.addEventListener('keydown', (e) => {
           switch (e.code) {
             case 'KeyD':
@@ -132,7 +132,7 @@ class BlueSoldier extends Soldiers {
                 break;
             }
         });
-      }
+      } */
 }
 
 class RedSoldier extends Soldiers {
@@ -141,7 +141,7 @@ class RedSoldier extends Soldiers {
         this.faction = 'red';
     }
 
-    keyboardEvents() {
+    /* keyboardEvents() {
         window.addEventListener('keydown', (e) => {
           switch (e.code) {
             case 'ArrowRight':
@@ -158,5 +158,5 @@ class RedSoldier extends Soldiers {
                 break;
             }
         });
-      }
+      } */
 }

@@ -14,7 +14,6 @@ class Game {
         this.baseArray = [];
         this.stamina = 0;
         this.production = 0;
-
     }
 
     start() {
@@ -113,8 +112,7 @@ class Game {
         console.log('Bases: ', this.baseArray);
 
         const controls = new Controls(this);
-        controls.keyboardEvents();
-        
+        controls.keyboardEvents(); 
         this.intervalId = setInterval(() => {
            this.update();
         }, 1000 / 60);
@@ -161,6 +159,8 @@ class Game {
         
         this.checkGameOver();
 
+        badAi();
+
     }
 
 
@@ -180,7 +180,7 @@ class Game {
     }
 
     staminaCounter() {
-        if (this.frames % 10 === 0) {
+        if (this.frames % 60 === 0) {
             this.blueArmy.forEach((bluesoldier) => {
                 bluesoldier.stamina ++;
             });
@@ -189,9 +189,9 @@ class Game {
             });
                
             this.blueArmy.forEach((bluesoldier) => {
-                if (bluesoldier.stamina > 10 && bluesoldier.hp < 10 && bluesoldier.hp > 0.4) {
+                if (bluesoldier.stamina > 7 && bluesoldier.hp < 10 && bluesoldier.hp > 0.4) {
                     bluesoldier.stamina = 5;
-                    bluesoldier.hp = bluesoldier.hp + 0.5;
+                    bluesoldier.hp = bluesoldier.hp + 1;
                     console.log(`Blue unit on position ${bluesoldier.gps} recovered 0.5 HP.`)
                 }
             });
@@ -199,7 +199,7 @@ class Game {
             this.redArmy.forEach((redsoldier) => {
                 if (redsoldier.stamina > 10 && redsoldier.hp < 10 && redsoldier.hp > 0.4) {
                     redsoldier.stamina = 5;
-                    redsoldier.hp = redsoldier.hp + 0.5;
+                    redsoldier.hp = redsoldier.hp + 1;
                     console.log(`Blue unit on position ${redsoldier.gps} recovered 0.5 HP.`)
                 }
             });
@@ -222,37 +222,43 @@ class Game {
 
     unitProduction() {
         this.baseArray.forEach((base) => {
-            if (base.production >= 2) {
-                base.production = 0;
+            if (base.production >= 4) {
                 if (base.faction === 'blue') {
-                    this.soldiers = new BlueSoldier(this, 'blue', Math.floor(Math.random() * 3) + 1, base.x, base.y, 100, 100, base.gps, 10, 'right', false, 3);
-                    let newSoldier = this.soldiers;
-                    this.blueArmy.push(newSoldier);
-                    for (let j = 0; j < this.blueArmy.length - 1; j++) {
-                        if (base.gps === this.blueArmy[j].gps) {
-                        console.log(`Cannot create a new unit on position ${base.gps}!`);
-                        this.blueArmy.pop();
+                    if (this.blueArmy.length < 6){
+                        base.production = 0;
+                        this.soldiers = new BlueSoldier(this, 'blue', Math.floor(Math.random() * 3) + 1, base.x, base.y, 100, 100, base.gps, 10, 'right', false, 3);
+                        let newSoldier = this.soldiers;
+                        this.blueArmy.push(newSoldier);
+                        for (let j = 0; j < this.blueArmy.length - 1; j++) {
+                            if (base.gps === this.blueArmy[j].gps) {
+                            console.log(`Cannot create a new unit on position ${base.gps}!`);
+                            this.blueArmy.pop();
+                            }
                         }
                     }
+
                 }
                 else if (base.faction === 'red') {
-                    this.soldiers = new RedSoldier(this, 'red', Math.floor(Math.random() * 3) + 1, base.x, base.y, 100, 100, base.gps, 10, 'left', false, 3);
-                    let newSoldier = this.soldiers;
-                    this.redArmy.push(newSoldier);
-                    for (let j = 0; j < this.redArmy.length - 1; j++) {
-                        if (base.gps === this.redArmy[j].gps) {
-                        console.log(`Cannot create a new unit on position ${base.gps}!`);
-                        this.redArmy.pop();
-                        }
+                    if (this.redArmy.length < 6){
+                        base.production = 0;
+                        this.soldiers = new RedSoldier(this, 'red', Math.floor(Math.random() * 3) + 1, base.x, base.y, 100, 100, base.gps, 10, 'left', false, 3);
+                        let newSoldier = this.soldiers;
+                        this.redArmy.push(newSoldier);                        
+                        for (let j = 0; j < this.redArmy.length - 1; j++) {
+                            if (base.gps === this.redArmy[j].gps) {
+                                console.log(`Cannot create a new unit on position ${base.gps}!`);
+                                this.redArmy.pop();
+                            }                    
                     }
                 }
             }
-        }); 
-    }
+        } 
+    });
+}
 
     checkGameOver() {
         let redBases = 0;
-        let blueBases = 0; 
+        let blueBases = 0;
         this.baseArray.forEach((base) => {
             if (base.faction === 'red') {
                 redBases ++;

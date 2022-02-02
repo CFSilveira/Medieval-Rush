@@ -52,6 +52,7 @@ class Controls {
                             console.log('Cannot move there');
                         } else if (enemy) {
                             console.log('Fight!');
+                            this.blueArmy[i].stamina = 0;
                             this.fight(this.blueArmy[i], enemy);
                         } else {
                             console.log(`Unit on square ${this.blueArmy[i].gps} moves right to ${futurePosition}`);
@@ -98,6 +99,7 @@ class Controls {
                             console.log('Cannot move there');
                         } else if (enemy) {
                             console.log('Fight!');
+                            this.blueArmy[i].stamina = 0;
                             this.fight(this.blueArmy[i], enemy);
                         } else {
                         console.log(`Unit on square ${this.blueArmy[i].gps} moves left to ${futurePosition}`);
@@ -143,6 +145,7 @@ class Controls {
                             console.log('Cannot move there');
                         } else if (enemy) {
                             console.log('Fight!');
+                            this.blueArmy[i].stamina = 0;
                             this.fight(this.blueArmy[i], enemy);
                         } else {
                         console.log(`Unit on square ${this.blueArmy[i].gps} moves up to ${futurePosition}`);
@@ -187,6 +190,7 @@ class Controls {
                             console.log('Cannot move there');
                         } else if (enemy) {
                             console.log('Fight!');
+                            this.blueArmy[i].stamina = 0;
                             this.fight(this.blueArmy[i], enemy);
                         } else {
                         console.log(`Unit on square ${this.blueArmy[i].gps} moves down to ${futurePosition}`);
@@ -245,6 +249,7 @@ class Controls {
                             console.log('Cannot move there');
                         } else if (enemy) {
                             console.log('Fight!');
+                            this.redArmy[i].stamina = 0;
                             this.fight(this.redArmy[i], enemy);
                         } else {
                             console.log(`Unit on square ${this.redArmy[i].gps} moves right to ${futurePosition}`);
@@ -292,6 +297,7 @@ class Controls {
                             console.log('Cannot move there');
                         } else if (enemy) {
                             console.log('Fight!');
+                            this.redArmy[i].stamina = 0;
                             this.fight(this.redArmy[i], enemy);
                         } else {
                         console.log(`Unit on square ${this.redArmy[i].gps} moves left to ${futurePosition}`);
@@ -337,6 +343,7 @@ class Controls {
                             console.log('Cannot move there');
                         } else if (enemy) {
                             console.log('Fight!');
+                            this.redArmy[i].stamina = 0;
                             this.fight(this.redArmy[i], enemy);
                         } else {
                         console.log(`Unit on square ${this.redArmy[i].gps} moves up to ${futurePosition}`);
@@ -381,6 +388,7 @@ class Controls {
                             console.log('Cannot move there');
                         } else if (enemy) {
                             console.log('Fight!');
+                            this.redArmy[i].stamina = 0;
                             this.fight(this.redArmy[i], enemy);
                         } else {
                         console.log(`Unit on square ${this.redArmy[i].gps} moves down to ${futurePosition}`);
@@ -401,7 +409,6 @@ class Controls {
         }
     
     fight(attacker, defender){
-        let fightResult = 0;
         let attackerStrength = attacker.hp;
         let defenderStrength = defender.hp;
         //calculate battle results, units deal twice/half dmg depending on unit types (rock / paper / scissor)
