@@ -3,6 +3,7 @@ class Controls {
       this.game = game;
       this.blueArmy = this.game.blueArmy;
       this.redArmy = this.game.redArmy;
+      this.yellowArmy = this.game.yellowArmy;
       this.baseArray = this.game.baseArray;
     }
 
@@ -48,6 +49,12 @@ class Controls {
                                 enemy = redsoldier;                                
                             }
                         });
+                        this.yellowArmy.forEach((yellowArmy) => {
+                            if (yellowArmy.gps === futurePosition) {
+                                enemy = yellowArmy;                                
+                            }
+                        });
+
                         if (friendlyFire === true) {
                             console.log('Cannot move there');
                         } else if (enemy) {
@@ -95,6 +102,12 @@ class Controls {
                                 enemy = redsoldier;                                
                             }
                         });
+                        this.yellowArmy.forEach((yellowArmy) => {
+                            if (yellowArmy.gps === futurePosition) {
+                                enemy = yellowArmy;                                
+                            }
+                        });
+
                         if (friendlyFire === true) {
                             console.log('Cannot move there');
                         } else if (enemy) {
@@ -141,6 +154,12 @@ class Controls {
                                 enemy = redsoldier;                                
                             }
                         });
+                        this.yellowArmy.forEach((yellowArmy) => {
+                            if (yellowArmy.gps === futurePosition) {
+                                enemy = yellowArmy;                                
+                            }
+                        });
+                        
                         if (friendlyFire === true) {
                             console.log('Cannot move there');
                         } else if (enemy) {
@@ -181,11 +200,18 @@ class Controls {
                             }
                         });
                         let enemy;
+
                         this.redArmy.forEach((redsoldier) => {
                             if (redsoldier.gps === futurePosition) {
                                 enemy = redsoldier;                                
                             }
                         });
+                        this.yellowArmy.forEach((yellowArmy) => {
+                            if (yellowArmy.gps === futurePosition) {
+                                enemy = yellowArmy;                                
+                            }
+                        });
+
                         if (friendlyFire === true) {
                             console.log('Cannot move there');
                         } else if (enemy) {
@@ -208,8 +234,8 @@ class Controls {
                 break;
 
             //red team movement
-            case 'NumpadEnter':
-                console.log('NumpadEnter pressed');
+            case 'Numpad0':
+                console.log('Numpad0 pressed');
                 for (let i = 0; i < this.redArmy.length; i++){
                     if (this.redArmy[i].isSelected) {
                         console.log('Blue changed unit being controlled');
@@ -221,8 +247,8 @@ class Controls {
                 }
                 break;
 
-            case 'ArrowRight':
-                console.log('Right arrow pressed');
+            case 'Numpad6':
+                console.log('Numpad6 pressed');
                 for (let i = 0; i < this.redArmy.length; i++){
                     if (this.redArmy[i].isSelected) {
                         if (this.redArmy[i].stamina < 5) {
@@ -245,6 +271,13 @@ class Controls {
                                 enemy = bluesoldier;                                
                             }
                         });
+
+                        this.yellowArmy.forEach((yellowArmy) => {
+                            if (yellowArmy.gps === futurePosition) {
+                                enemy = yellowArmy;                                
+                            }
+                        });
+
                         if (friendlyFire === true) {
                             console.log('Cannot move there');
                         } else if (enemy) {
@@ -269,8 +302,8 @@ class Controls {
                 }
                 break;
 
-            case 'ArrowLeft':
-                console.log('Left arrow pressed');
+            case 'Numpad4':
+                console.log('Numpad4 pressed');
                 for (let i = 0; i < this.redArmy.length; i++){
                     if (this.redArmy[i].isSelected) {
                         if (this.redArmy[i].stamina < 5) {
@@ -291,6 +324,11 @@ class Controls {
                         this.blueArmy.forEach((bluesoldier) => {
                             if (bluesoldier.gps === futurePosition) {
                                 enemy = bluesoldier;                                
+                            }
+                        });
+                        this.yellowArmy.forEach((yellowArmy) => {
+                            if (yellowArmy.gps === futurePosition) {
+                                enemy = yellowArmy;                                
                             }
                         });
                         if (friendlyFire === true) {
@@ -315,8 +353,8 @@ class Controls {
                 }
                 break;
 
-            case 'ArrowUp':
-                console.log('Up arrow pressed');
+            case 'Numpad8':
+                console.log('Numpad8 pressed');
                 for (let i = 0; i < this.redArmy.length; i++){
                     if (this.redArmy[i].isSelected) {
                         if (this.redArmy[i].stamina < 5) {
@@ -337,6 +375,11 @@ class Controls {
                         this.blueArmy.forEach((bluesoldier) => {
                             if (bluesoldier.gps === futurePosition) {
                                 enemy = bluesoldier;                                
+                            }
+                        });
+                        this.yellowArmy.forEach((yellowArmy) => {
+                            if (yellowArmy.gps === futurePosition) {
+                                enemy = yellowArmy;                                
                             }
                         });
                         if (friendlyFire === true) {
@@ -360,8 +403,8 @@ class Controls {
                 }
                 break;
 
-            case 'ArrowDown':
-                console.log('Down arrow pressed');
+            case 'Numpad5':
+                console.log('Numpad5 pressed');
                 for (let i = 0; i < this.redArmy.length; i++){
                     if (this.redArmy[i].isSelected) {
                         if (this.redArmy[i].stamina < 5) {
@@ -384,6 +427,11 @@ class Controls {
                                 enemy = bluesoldier;                                
                             }
                         });
+                        this.yellowArmy.forEach((yellowArmy) => {
+                            if (yellowArmy.gps === futurePosition) {
+                                enemy = yellowArmy;                                
+                            }
+                        });
                         if (friendlyFire === true) {
                             console.log('Cannot move there');
                         } else if (enemy) {
@@ -403,6 +451,231 @@ class Controls {
                         }
                     }
                 }
+                break;
+
+                //yellow team movement
+                case 'ArrowLeft':
+                console.log('Left Arrow pressed');
+                for (let i = 0; i < this.yellowArmy.length; i++){
+                    if (this.yellowArmy[i].isSelected) {
+                        console.log('Yellow changed unit being controlled');
+                        this.yellowArmy[i].isSelected = false;
+                        let nextUnit = (i+1) % this.yellowArmy.length;
+                        this.yellowArmy[nextUnit].isSelected = true;
+                        break;
+                    }
+                }
+                break;
+
+            case 'KeyL':
+                console.log('L pressed');
+                for (let i = 0; i < this.yellowArmy.length; i++){
+                    if (this.yellowArmy[i].isSelected) {
+                        if (this.yellowArmy[i].stamina < 5) {
+                            break;
+                        }
+                        if ((this.yellowArmy[i].x + 100) > 1100) {
+                            console.log(`Can't move outside the battlefield`)
+                            break;
+                        }
+                        let futurePosition = ((this.yellowArmy[i].x + 100) / 100).toString() + (this.yellowArmy[i].y / 100).toString();
+                        let friendlyFire;
+                        this.yellowArmy.forEach((yellowsoldier) => {
+                            if (yellowsoldier.gps === futurePosition) {
+                                friendlyFire = true;                                
+                            }
+                        });
+                        
+                        let enemy;
+                        this.redArmy.forEach((redsoldier) => {
+                            if (redsoldier.gps === futurePosition) {
+                                enemy = redsoldier;                                
+                            }
+                        });
+
+                        this.blueArmy.forEach((bluesoldier) => {
+                            if (bluesoldier.gps === futurePosition) {
+                                enemy = bluesoldier;                                
+                            }
+                        });
+                        if (friendlyFire === true) {
+                            console.log('Cannot move there');
+                        } else if (enemy) {
+                            console.log('Fight!');
+                            this.yellowArmy[i].stamina = 0;
+                            this.fight(this.yellowArmy[i], enemy);
+                        } else {
+                            console.log(`Unit on square ${this.yellowArmy[i].gps} moves right to ${futurePosition}`);
+                            this.yellowArmy[i].facing = 'right';
+                            this.yellowArmy[i].x += 100;
+                            this.yellowArmy[i].stamina = 0;
+                            this.yellowArmy[i].gps = (this.yellowArmy[i].x / 100).toString() + (this.yellowArmy[i].y / 100).toString();
+                            this.baseArray.forEach((base) => {
+                                if (base.gps === futurePosition) {
+                                    base.faction = 'yellow';
+                                }
+                            });
+                        }
+
+                    }
+                }
+                break;
+
+            case 'KeyJ':
+                console.log('J pressed');
+                for (let i = 0; i < this.yellowArmy.length; i++){
+                    if (this.yellowArmy[i].isSelected) {
+                        if (this.yellowArmy[i].stamina < 5) {
+                            break;
+                        }
+                        if ((this.yellowArmy[i].x - 100) < 0) {
+                            console.log(`Can't move outside the battlefield`)
+                            break;
+                        }
+                        let futurePosition = ((this.yellowArmy[i].x - 100) / 100).toString() + (this.yellowArmy[i].y / 100).toString();
+                        let friendlyFire;
+                        this.yellowArmy.forEach((yellowsoldier) => {
+                            if (yellowsoldier.gps === futurePosition) {
+                                friendlyFire = true;                                
+                            }
+                        });
+                        
+                        let enemy;
+                        this.redArmy.forEach((redsoldier) => {
+                            if (redsoldier.gps === futurePosition) {
+                                enemy = redsoldier;                                
+                            }
+                        });
+
+                        this.blueArmy.forEach((bluesoldier) => {
+                            if (bluesoldier.gps === futurePosition) {
+                                enemy = bluesoldier;                                
+                            }
+                        });
+                        if (friendlyFire === true) {
+                            console.log('Cannot move there');
+                        } else if (enemy) {
+                            console.log('Fight!');
+                            this.yellowArmy[i].stamina = 0;
+                            this.fight(this.yellowArmy[i], enemy);
+                        } else {
+                        console.log(`Unit on square ${this.yellowArmy[i].gps} moves left to ${futurePosition}`);
+                        this.yellowArmy[i].facing = 'left';
+                        this.yellowArmy[i].x -= 100;
+                        this.yellowArmy[i].stamina = 0;
+                        this.yellowArmy[i].gps = (this.yellowArmy[i].x / 100).toString() + (this.yellowArmy[i].y / 100).toString();
+                        this.baseArray.forEach((base) => {
+                            if (base.gps === futurePosition) {
+                                base.faction = 'yellow';
+                            }
+                        });
+                }
+            }
+        }
+                break;
+
+            case 'KeyI':
+                console.log('I pressed');
+                for (let i = 0; i < this.yellowArmy.length; i++){
+                    if (this.yellowArmy[i].isSelected) {
+                        if (this.yellowArmy[i].stamina < 5) {
+                            break;
+                        }
+                        if ((this.yellowArmy[i].y - 100) < 0) {
+                            console.log(`Can't move outside the battlefield`)
+                            break;
+                        }
+                        let futurePosition = (this.yellowArmy[i].x / 100).toString() + ((this.yellowArmy[i].y - 100) / 100).toString();
+                        let friendlyFire;
+                        this.yellowArmy.forEach((yellowsoldier) => {
+                            if (yellowsoldier.gps === futurePosition) {
+                                friendlyFire = true;                                
+                            }
+                        });
+                        
+                        let enemy;
+                        this.redArmy.forEach((redsoldier) => {
+                            if (redsoldier.gps === futurePosition) {
+                                enemy = redsoldier;                                
+                            }
+                        });
+
+                        this.blueArmy.forEach((bluesoldier) => {
+                            if (bluesoldier.gps === futurePosition) {
+                                enemy = bluesoldier;                                
+                            }
+                        });
+                        if (friendlyFire === true) {
+                            console.log('Cannot move there');
+                        } else if (enemy) {
+                            console.log('Fight!');
+                            this.yellowArmy[i].stamina = 0;
+                            this.fight(this.yellowArmy[i], enemy);
+                        } else {
+                        console.log(`Unit on square ${this.yellowArmy[i].gps} moves up to ${futurePosition}`);
+                        this.yellowArmy[i].y -= 100;
+                        this.yellowArmy[i].stamina = 0;
+                        this.yellowArmy[i].gps = (this.yellowArmy[i].x / 100).toString() + (this.yellowArmy[i].y / 100).toString()
+                        this.baseArray.forEach((base) => {
+                            if (base.gps === futurePosition) {
+                                base.faction = 'yellow';
+                            }
+                        });
+                }
+            }
+        }
+                break;
+
+            case 'KeyK':
+                console.log('K pressed');
+                for (let i = 0; i < this.yellowArmy.length; i++){
+                    if (this.yellowArmy[i].isSelected) {
+                        if (this.yellowArmy[i].stamina < 5) {
+                            break;
+                        }
+                        if ((this.yellowArmy[i].y + 100) > 700) {
+                            console.log(`Can't move outside the battlefield`)
+                            break;
+                        }
+                        let futurePosition = (this.yellowArmy[i].x / 100).toString() + ((this.yellowArmy[i].y + 100) / 100).toString();
+                        let friendlyFire;
+                        this.yellowArmy.forEach((yellowsoldier) => {
+                            if (yellowsoldier.gps === futurePosition) {
+                                friendlyFire = true;                                
+                            }
+                        });
+                        
+                        let enemy;
+                        this.redArmy.forEach((redsoldier) => {
+                            if (redsoldier.gps === futurePosition) {
+                                enemy = redsoldier;                                
+                            }
+                        });
+
+                        this.blueArmy.forEach((bluesoldier) => {
+                            if (bluesoldier.gps === futurePosition) {
+                                enemy = bluesoldier;                                
+                            }
+                        });
+                        if (friendlyFire === true) {
+                            console.log('Cannot move there');
+                        } else if (enemy) {
+                            console.log('Fight!');
+                            this.yellowArmy[i].stamina = 0;
+                            this.fight(this.yellowArmy[i], enemy);
+                        } else {
+                        console.log(`Unit on square ${this.yellowArmy[i].gps} moves down to ${futurePosition}`);
+                        this.yellowArmy[i].y += 100;
+                        this.yellowArmy[i].stamina = 0;
+                        this.yellowArmy[i].gps = (this.yellowArmy[i].x / 100).toString() + (this.yellowArmy[i].y / 100).toString()
+                        this.baseArray.forEach((base) => {
+                            if (base.gps === futurePosition) {
+                                base.faction = 'yellow';
+                            }
+                        });
+                }
+            }
+        }
                 break;
           }
           });
@@ -484,6 +757,19 @@ class Controls {
                 if (this.redArmy.length > 0) {
                     let nextUnit = (index+1) % this.redArmy.length;
                     this.redArmy[nextUnit].isSelected = true;
+                } 
+            }
+        });
+        
+        this.yellowArmy.forEach((yellowsoldier) => {
+            let index;
+            if (yellowsoldier.hp < 1) {
+                console.log('Red unit killed!');
+                index = this.yellowArmy.indexOf(yellowsoldier);
+                this.yellowArmy.splice(index, 1);
+                if (this.yellowArmy.length > 0) {
+                    let nextUnit = (index+1) % this.yellowArmy.length;
+                    this.yellowArmy[nextUnit].isSelected = true;
                 } 
             }
         });  

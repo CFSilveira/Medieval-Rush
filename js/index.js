@@ -17,6 +17,18 @@ window.onload = () => {
       game.start();
     }
 
+    document.getElementById('start-button-three').onclick = () => {
+      gameStarted.play();
+      startGameThree();
+      btn.style.display = 'none';
+      gameBoard.style.display = 'flex'
+    };
+  
+    function startGameThree() {
+      const game = new Game();
+      game.startThree();
+    }
+
     document.getElementById('start-button-ai').onclick = () => {
       gameStarted.play();
       startGameAi();

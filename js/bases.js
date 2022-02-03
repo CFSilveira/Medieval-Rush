@@ -19,6 +19,9 @@ class Bases {
         else if (this.faction === 'red') {
             this.img.src = './images/redbase.png';
         }
+        else if (this.faction === 'yellow') {
+            this.img.src = './images/yellowbase.png';
+        }
         else if (this.faction === 'neutral') {
             this.img.src = './images/neutralbase.png';
         }

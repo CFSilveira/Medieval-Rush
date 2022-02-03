@@ -25,6 +25,9 @@ class Soldiers {
         else if (this.type === 1 && this.faction === 'red') {
             this.img.src = './images/rspear.png';
         }
+        else if (this.type === 1 && this.faction === 'yellow') {
+            this.img.src = './images/yspear.png';
+        }
         //horse rotation
         else if (this.type === 2 && this.faction === 'blue') {
             if (this.facing === 'right') {
@@ -36,12 +39,24 @@ class Soldiers {
             if (this.facing === 'right') {
             this.img.src = './images/rhorseright.png';
         } else {this.img.src = './images/rhorseleft.png';}
-    }
+        }
+
+        else if (this.type === 2 && this.faction === 'yellow') {
+            if (this.facing === 'right') {
+            this.img.src = './images/yhorseright.png';
+        } else {this.img.src = './images/yhorseleft.png';}
+        }
         //bow rotation
         else if (this.type === 3 && this.faction === 'blue') {
             if (this.facing === 'right') {
                 this.img.src = './images/bbowright.png';
             } else {this.img.src = './images/bbowleft.png'}
+        }
+
+        else if (this.type === 3 && this.faction === 'yellow') {
+            if (this.facing === 'right') {
+                this.img.src = './images/ybowright.png';
+            } else {this.img.src = './images/ybowleft.png'}
         }
 
         else if (this.type === 3 && this.faction === 'red') {
@@ -87,7 +102,10 @@ class Soldiers {
         }
         else if (this.faction === 'red') {
             this.square.src = './images/rsquare.png';
-        }        
+        }
+        else if (this.faction === 'yellow') {
+            this.square.src = './images/ysquare.png';
+        }           
 
         this.game.ctx.drawImage(this.square, this.x, this.y, 100, 100);
     }
@@ -120,5 +138,12 @@ class RedSoldier extends Soldiers {
     constructor(game, faction, type, x, y, width, height, gps, hp, facing, isSelected, stamina) {
         super(game, type, x, y, width, height, gps, hp, facing, isSelected, stamina);
         this.faction = 'red';
+    }
+}
+
+class YellowSoldier extends Soldiers {
+    constructor(game, faction, type, x, y, width, height, gps, hp, facing, isSelected, stamina) {
+        super(game, type, x, y, width, height, gps, hp, facing, isSelected, stamina);
+        this.faction = 'yellow';
     }
 }
