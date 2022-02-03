@@ -1,6 +1,20 @@
-body {
+/* css reset */
+:root {
+    font-size: 16px;
+    font-family: 'JetBrains Mono', monospace;
+    --light: #ededed;
+    --dark: #000;
+    --accent: #FF008E;
+    --primary: #5800FF;
+    --secondary: #FFC600;
+    scroll-behavior: smooth;
+}
+
+*, *::before, *::after {
+    border: 0;
+    margin: 0;
     padding: 0;
-    text-align: center;
+    box-sizing: border-box;
 }
 
 body button {
@@ -13,13 +27,44 @@ body button {
     border-radius: 5px;
     margin-top: 50px;
     margin-bottom: 20px;
-    margin-left: auto;
-    margin-right: auto;
 }
-    
+ 
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0.5rem 0 0 0;
+}
+#container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.instructions h2{
+  text-align: center;
+}
+
+.details {
+    display: flex;
+    flex-direction: row;
+}
+
+.blue, .red {
+    margin: 40px;
+    text-align: center;
+}
 
 #game-board {
-    float: left;
-    padding: 20px 0px;
-}
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    margin: 0.5rem 0 0 0;
+    }
 
+.instructions {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+}

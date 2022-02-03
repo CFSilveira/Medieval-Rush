@@ -16,6 +16,13 @@ class Game {
         this.production = 0;
     }
 
+    startAi() {
+        this.intervalId = setInterval(() => {
+            this.updateAi();
+         }, 1000 / 60);
+
+    }
+
     start() {
         //things that trigger only once
         
@@ -159,9 +166,11 @@ class Game {
         });
         
         this.checkGameOver();
+        //this.computer.badAi();        
+    }
 
-        this.computer.badAi();
-
+    updateAi (){
+        this.refreshAi ()
     }
 
 
@@ -180,6 +189,15 @@ class Game {
         }
     }
 
+    refreshAi () {
+        if (this.frames % 60 === 0) {
+            this.computer.badAi()
+        }
+        if (this.frames % 200 === 0) {
+            this.computer.badAi()
+        }
+    }
+
     staminaCounter() {
         if (this.frames % 60 === 0) {
             this.blueArmy.forEach((bluesoldier) => {
@@ -190,7 +208,7 @@ class Game {
             });
                
             this.blueArmy.forEach((bluesoldier) => {
-                if (bluesoldier.stamina > 7 && bluesoldier.hp < 10 && bluesoldier.hp > 0.4) {
+                if (bluesoldier.stamina > 12 && bluesoldier.hp < 10 && bluesoldier.hp > 0.4) {
                     bluesoldier.stamina = 5;
                     bluesoldier.hp = bluesoldier.hp + 1;
                     console.log(`Blue unit on position ${bluesoldier.gps} recovered 0.5 HP.`)
@@ -198,7 +216,7 @@ class Game {
             });
 
             this.redArmy.forEach((redsoldier) => {
-                if (redsoldier.stamina > 10 && redsoldier.hp < 10 && redsoldier.hp > 0.4) {
+                if (redsoldier.stamina > 12 && redsoldier.hp < 10 && redsoldier.hp > 0.4) {
                     redsoldier.stamina = 5;
                     redsoldier.hp = redsoldier.hp + 1;
                     console.log(`Blue unit on position ${redsoldier.gps} recovered 0.5 HP.`)
