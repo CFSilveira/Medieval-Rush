@@ -17,6 +17,7 @@ class Game {
         this.production = 0;
     }
 
+    // Starts the AI
     startAi() {
         this.intervalId = setInterval(() => {
             this.updateAi();
@@ -24,6 +25,7 @@ class Game {
 
     }
 
+    //Start 3 player game
     startThree() {
         //things that trigger only once
         
@@ -155,9 +157,10 @@ class Game {
         controls.keyboardEvents(); 
         this.intervalId = setInterval(() => {
            this.update();
-        }, 1000 / 60);
+        }, 1000 / 30);
     }
 
+    //starts 2 player game
     start() {
         //things that trigger only once
         
@@ -261,7 +264,113 @@ class Game {
            this.update();
         }, 1000 / 60);
     }
+    
+    //same as above, for turn base game. Should be moved to a different file.
+    startTbm() {
+        //things that trigger only once
+        
+        //random creation and positioning of blue units
+        for (let i = 1 ; i <= 4; i++) {
+            let xAxis = Math.floor(Math.random() * 5);
+            let yAxis = Math.floor(Math.random() * 8);
+            let typeOfSoldier = Math.floor(Math.random() * 3) + 1;
+            let gps = xAxis.toString() + yAxis.toString()
+            xAxis = xAxis * 80;
+            yAxis = yAxis * 80;
+            let stamina = 5;
+            if (i < 4) {
+                this.soldiers = new BlueSoldier(this, 'blue', typeOfSoldier, xAxis, yAxis, 80, 80, gps, 10, 'right', false, stamina);
+            }
+            else {
+                this.soldiers = new BlueSoldier(this, 'blue', typeOfSoldier, xAxis, yAxis, 80, 80, gps, 10, 'right', true, stamina);
+            }
+            let newSoldier = this.soldiers;
+            //checking if there is another soldier on that square
+            this.blueArmy.push(newSoldier);
+            for (let j = 0; j < this.blueArmy.length - 1; j++) {
+                if (gps === this.blueArmy[j].gps) {
+                console.log(`There is a unit already on position ${gps}. Duplicate removed!`);
+                i--;
+                this.blueArmy.pop();
+                }
+            }
 
+            
+        }
+        console.log(`Blue Army: `, this.blueArmy);
+
+        //random creation and positioning of red units
+        for (let i = 1 ; i <= 4; i++) {
+            let xAxis = Math.floor(Math.random() * 5) + 9;
+            let yAxis = Math.floor(Math.random() * 8) + 4;
+            let typeOfSoldier = Math.floor(Math.random() * 3) + 1;
+            let gps = xAxis.toString() + yAxis.toString()
+            xAxis = xAxis * 80;
+            yAxis = yAxis * 80;
+            let stamina = 5;
+            if (i < 4) {
+                this.soldiers = new RedSoldier(this, 'red', typeOfSoldier, xAxis, yAxis, 80, 80, gps, 10, 'left', false, stamina);
+            }
+            else {
+                this.soldiers = new RedSoldier(this, 'red', typeOfSoldier, xAxis, yAxis, 80, 80, gps, 10, 'left', true, stamina);
+            }
+            let newSoldier = this.soldiers;
+            //checking if there is another soldier on that square
+            this.redArmy.push(newSoldier);
+            for (let j = 0; j < this.redArmy.length - 1; j++) {
+                if (gps === this.redArmy[j].gps) {
+                console.log(`There is a unit already on position ${gps}. Duplicate removed!`);
+                i--;
+                this.redArmy.pop();
+                }
+            }
+        }
+        console.log(`Red Army: `, this.redArmy);
+
+        //random creation and positioning of blue, neutral and red bases - improved the unit creation method
+        for (let i = 1; i <= 6; i++) {
+            let xAxis = Math.floor(Math.random() * 4);
+            if (i >= 4) {xAxis = xAxis + 10};
+            let yAxis = Math.floor(Math.random() * 6) + 3;
+            let gps = xAxis.toString() + yAxis.toString()
+            xAxis = xAxis * 80;
+            yAxis = yAxis * 80;
+            if (i <= 2) {
+                this.bases = new Bases(this, 'blue', xAxis, yAxis, 80, 80, gps, 0);
+            }
+            else if (i === 3) {
+                this.bases = new Bases(this, 'neutral', xAxis, yAxis, 80, 80, gps, 0);
+            }
+            else if (i === 4) {
+                this.bases = new Bases(this, 'neutral', xAxis, yAxis, 80, 80, gps, 0);
+            }
+            else if (i > 4) {
+                this.bases = new Bases(this, 'red', xAxis, yAxis, 80, 80, gps, 0);
+            }
+            let newBase = this.bases;
+            //checking if there is another soldier on that square
+            this.baseArray.push(newBase);
+            for (let j = 0; j < this.baseArray.length - 1; j++) {
+                if (gps === this.baseArray[j].gps) {
+                console.log(`There is already a base on position ${gps}. Duplicate removed!`);
+                i--;
+                this.baseArray.pop();
+                }
+            }
+
+        }
+        console.log('Bases: ', this.baseArray);
+
+        this.computer = new Computer(this);        
+
+        const controls = new Controls(this);
+        controls.keyboardEvents(); 
+        this.intervalId = setInterval(() => {
+           this.updateTbm();
+        }, 1000 / 60);
+    }
+
+    //functions to run constantly
     update() {
         this.drawBackground();
         this.baseArray.forEach((base) => {
@@ -317,6 +426,62 @@ class Game {
         //this.computer.badAi();        
     }
 
+    //same as above, for turn base game. Should be moved to a different file.
+    updateTbm() {
+        this.drawBackgroundTbm();
+        this.baseArray.forEach((base) => {
+            base.drawTbm()
+        });
+        
+        this.staminaCounter();
+        //this.regeneration();
+        this.productionCounter();
+        this.unitProduction();
+        this.frames++;
+
+        //draws a blue square around the selected unit
+        this.blueArmy.forEach((bluesoldier) => {
+            if (bluesoldier.isSelected) {
+                bluesoldier.drawSquareTbm();
+            }
+        });
+
+        //draws all the blue units and stamina status
+        this.blueArmy.forEach((bluesoldier) => {
+            bluesoldier.drawTbm();
+            bluesoldier.drawStaminaTbm();            
+        });
+
+        //draws a red square around the selected unit
+        this.redArmy.forEach((redsoldier) => {
+            if (redsoldier.isSelected) {
+                redsoldier.drawSquareTbm();
+            }
+        });
+        
+        //draws all the red units and stamina status
+        this.redArmy.forEach((redsoldier) => {
+            redsoldier.drawTbm();
+            redsoldier.drawStaminaTbm();
+        });
+
+        //draws a blue square around the selected unit
+        this.yellowArmy.forEach((YellowSoldier) => {
+            if (YellowSoldier.isSelected) {
+                YellowSoldier.drawSquareTbm();
+            }
+        });
+
+        //draws all the blue units and stamina status
+        this.yellowArmy.forEach((YellowSoldier) => {
+            YellowSoldier.drawTbm();
+            YellowSoldier.drawStaminaTbm();            
+        });
+        
+        this.checkGameOver();
+        //this.computer.badAi();        
+    }
+
     updateAi (){
         this.refreshAi ()
     }
@@ -335,6 +500,11 @@ class Game {
             this.background.src = './images/background3.png'
             this.ctx.drawImage(this.background, this.x, this.y, this.canvasWidth, this.canvasHeight);
         }
+    }
+
+    drawBackgroundTbm() {
+        this.background.src = './images/backgroundTbm.png'
+        this.ctx.drawImage(this.background, this.x, this.y, this.canvasWidth, this.canvasHeight);
     }
 
     refreshAi () {

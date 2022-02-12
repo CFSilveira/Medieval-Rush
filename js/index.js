@@ -47,4 +47,19 @@ window.onload = () => {
         game.startAi();
         gameMusic.play();
       }
+
+    document.getElementById('start-button-tbm').onclick = () => {
+      gameStarted.play();
+      startGameTbm();
+      btn.style.display = 'none';
+      gameBoard.style.display = 'flex'
+    };
+  
+    function startGameTbm() {
+      const game = new Game();
+      game.startTbm();
+      //gameMusic.play();
+    }
+
+      
   };

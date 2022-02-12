@@ -27,4 +27,20 @@ class Bases {
         }
         this.game.ctx.drawImage(this.img, this.x, this.y, 100, 100);
     }
+
+    drawTbm() {
+        if (this.faction === 'blue') {
+            this.img.src = './images/bluebase.png';
+        }
+        else if (this.faction === 'red') {
+            this.img.src = './images/redbase.png';
+        }
+        else if (this.faction === 'yellow') {
+            this.img.src = './images/yellowbase.png';
+        }
+        else if (this.faction === 'neutral') {
+            this.img.src = './images/neutralbase.png';
+        }
+        this.game.ctx.drawImage(this.img, this.x, this.y, 80, 80);
+    }
 }
