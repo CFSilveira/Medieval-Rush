@@ -272,7 +272,7 @@ class Game {
         //random creation and positioning of blue units
         for (let i = 1 ; i <= 4; i++) {
             let xAxis = Math.floor(Math.random() * 5);
-            let yAxis = Math.floor(Math.random() * 8);
+            let yAxis = Math.floor(Math.random() * 5);
             let typeOfSoldier = Math.floor(Math.random() * 3) + 1;
             let gps = xAxis.toString() + yAxis.toString()
             xAxis = xAxis * 80;
@@ -302,7 +302,7 @@ class Game {
         //random creation and positioning of red units
         for (let i = 1 ; i <= 4; i++) {
             let xAxis = Math.floor(Math.random() * 5) + 9;
-            let yAxis = Math.floor(Math.random() * 8) + 4;
+            let yAxis = Math.floor(Math.random() * 4) + 5;
             let typeOfSoldier = Math.floor(Math.random() * 3) + 1;
             let gps = xAxis.toString() + yAxis.toString()
             xAxis = xAxis * 80;
@@ -330,7 +330,8 @@ class Game {
         //random creation and positioning of blue, neutral and red bases - improved the unit creation method
         for (let i = 1; i <= 6; i++) {
             let xAxis = Math.floor(Math.random() * 4);
-            if (i >= 4) {xAxis = xAxis + 10};
+            if (i >= 3 && i < 5) {xAxis = xAxis + 5};
+            if (i >= 5) {xAxis = xAxis + 10};
             let yAxis = Math.floor(Math.random() * 6) + 3;
             let gps = xAxis.toString() + yAxis.toString()
             xAxis = xAxis * 80;
@@ -361,7 +362,6 @@ class Game {
         }
         console.log('Bases: ', this.baseArray);
 
-        this.computer = new Computer(this);        
 
         const controls = new Controls(this);
         controls.keyboardEvents(); 
