@@ -11,7 +11,8 @@
 <body>
 
     <div id="container">
-
+        <img src='/images/logo.png' alt='logo'></img>
+        
         <h1>Medieval Rush</h1>
         
         <div class="start-menu">
@@ -21,8 +22,8 @@
      
             <button id="start-button-ai">VS Computer</button>     
             
-            <button id="start-button-tbm">Turn Based Mode</button>
-         </div>    
+<!--             <button id="start-button-tbm">Turn Based Mode</button>
+ -->         </div>    
      
          <div class= "instructions">
      
@@ -30,27 +31,27 @@
             
             <div class="details">
              <div class= "blue">
-                 <h3>Blue player</h3>
+                 <h3 class="blue-player">Blue player</h3>
                  <p>WASD keys to move</p>
                  <p>Space bar to change unit being controlled</p>
                  <p>-----</p>
-                 <p>Green units can move, then they must rest</p>
+                 <p class="tip">Green units can move, then they must rest</p>
              </div>
 
              <div class= "yellow">
-                <h3>Yellow Player</h3>
+                <h3 class="yellow-player">Yellow Player</h3>
                 <p>IJKL keys to move</p>
                 <p>Left arrow key to change unit being controlled</p>
                 <p>-----</p>
-                <p>Units regain health when not moving</p>
+                <p class="tip">Units regain health when not moving</p>
             </div>
      
              <div class= "red">
-                 <h3>Red player</h3>
+                 <h3 class="red-player">Red player</h3>
                  <p>Arrow keys to move</p>
                  <p>Numpad enter to change unit being controlled</p>
                  <p>-----</p>
-                 <p>Bases spawn new units every 20 seconds</p>
+                 <p class="tip">Bases spawn new units every 20 seconds</p>
              </div>
             </div>
 
@@ -69,6 +70,10 @@
     <div id="game-board">
         <canvas id="canvas" width="1200" height="800"></canvas>
     </div>
+
+
+
+    <p>Created by: <span class="tip">Carlos Silveira</span> - <a href="https://github.com/CFSilveira">Github</a></p>
 
 
 
