@@ -1,2 +1,1 @@
-Try the app using the link bellow:
-https://cfsilveira.github.io/Medieval-Rush/
+Try the app using the following link: https://cfsilveira.github.io/Medieval-Rush/
