@@ -1,6 +1,6 @@
 Try the game using the following link: https://cfsilveira.github.io/Medieval-Rush/
 
-Medieval Rush was inspired by and aims to capture the (chaotic!) feeling of old school computer games, when several friends would play against each other while sharing the same keyboard.
+Medieval Rush was inspired by old school computer games and aims to capture the (chaotic!) feeling of , when several friends would play against each other while sharing the same keyboard.
 
 The objective of the game is to destroy all the enemy troops and conquer all enemy bases.
 
