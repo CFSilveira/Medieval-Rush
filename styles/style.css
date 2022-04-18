@@ -21,12 +21,14 @@ body button {
     font-size: 60px;
     background-color: #870007;
     color: #fff;
-    padding: 20px 40px;
+    padding: 1vh 2vw;
     border: 0;
     box-shadow: 0;
     border-radius: 5px;
-    margin-top: 50px;
-    margin-bottom: 20px;
+    margin-top: 2.5vh;
+    margin-bottom: 1.5vh;
+    margin-left: 1vw;
+    margin-right: 1vw;
 }
  
 
@@ -55,13 +57,39 @@ body {
   text-align: center;
 }
 
+.start-menu {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: space-around;
+	align-items: center;
+	align-content: stretch;  
+}
+
+.rules-card2 {
+    max-width: 10vh;
+    transform: scaleX(-1);
+}
+
+.rules-card3 {
+    max-width: 12vh;
+}
+
+.rules-card {
+    max-width: 10vh;
+}
+
+.controls-card {
+    height: 5vh;
+}
+
 .details {
     display: flex;
     flex-direction: row;
 }
 
 .blue, .red, .yellow, .rules {
-    margin: 40px;
+    margin: 1vh 3vw;
     text-align: center;
 }
 
@@ -78,6 +106,16 @@ body {
 .yellow-player {
     background-color: rgba(251, 255, 0, 0.247);
     border-radius: 15px;;
+}
+
+.controls {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: space-evenly;
+	align-items: center;
+	align-content: center;
+    margin-top: 1vh;
 }
 
 #game-board {
